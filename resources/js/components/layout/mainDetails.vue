@@ -42,11 +42,11 @@
                                 outlined
                                 color="indigo"
                                 small>
-                                <v-icon>mdi-pencil</v-icon>
+                                <v-icon small>mdi-pencil</v-icon>
                                 Editar
                             </v-btn>
                         </v-row>
-                    <v-row
+                    <!-- <v-row
                         align="center"
                         class="mx-0"
                     >
@@ -62,34 +62,71 @@
                         <div class="grey--text ms-4">
                         4.5 (413)
                         </div>
-                    </v-row>
+                    </v-row> -->
+											<v-row align="center"
+                        class="mx-0">
+												<v-col cols="1">
+													<v-icon style="margin-top: 2px;">
+														mdi-cake-variant
+													</v-icon>
+												</v-col>
+												<v-col cols="8">
+													<span class="grey--text ms-4" style="font-size: small;">12/01/1997</span><br>
+													<span class="grey--text ms-4" style="font-size: small; margin-top: -20px;">27 Anos</span>
+												</v-col>
+											</v-row>
+											<v-row
+												align="center"
+												class="mx-0">
+													<v-col cols="1">
+														<v-icon>
+															mdi-account-box
+														</v-icon>
+													</v-col>
+													<v-col cols="8">
+														<span class="grey--text ms-4" style="font-size: small;">MOÇAMBICANO</span><br>
+														<span class="grey--text ms-4" style="font-size: small;">MASCULINO</span><br>
+														<span class="grey--text ms-4" style="font-size: small;">NUIT: 123456789</span><br>
+														<span class="grey--text ms-4" style="font-size: small;">DOCUMENTO: 123455656</span><br>
+													</v-col>
+											</v-row>
 
-                    <div class="my-4 text-subtitle-1">
-                        $ • Italian, Cafe
-                    </div>
+											<v-row align="center"
+                        class="mx-0">
+												<v-col cols="1">
+													<v-icon> mdi-map-marker</v-icon>
+												</v-col>
+												<v-col cols="8">
+													<span class="grey--text ms-4" style="font-size: small;">Cidade de Maputo</span><br>
+													<span class="grey--text ms-4" style="font-size: small;">Endereço, Maputo Magoanine</span><br>
+												</v-col>
+											</v-row>
+											<v-row align="center"
+                        class="mx-0">
+												<v-col cols="1">
+													<v-icon> mdi-cellphone</v-icon>
+												</v-col>
+												<v-col cols="8">
+													<span class="grey--text ms-4" style="font-size: small;">841212121</span><br>
+													<span class="grey--text ms-4" style="font-size: small;">841212121</span><br>
+													<span class="grey--text ms-4" style="font-size: small;">841212121</span><br>
+												</v-col>
+											</v-row>
+											<v-row align="center"
+                        class="mx-0">
+												<v-col cols="1">
+													<v-icon> mdi-email</v-icon>
+												</v-col>
+												<v-col cols="8">
+													<span class="grey--text ms-4" style="font-size: small;">gersonjfmaoze@gmail.com</span><br>
+												</v-col>
+											</v-row>
 
-                    <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+
                     </v-card-text>
 
                     <v-divider class="mx-4"></v-divider>
 
-                    <v-card-title>Tonight's availability</v-card-title>
-
-                    <v-card-text>
-                    <v-chip-group
-                        v-model="selection"
-                        active-class="deep-purple accent-4 white--text"
-                        column
-                    >
-                        <v-chip>5:30PM</v-chip>
-
-                        <v-chip>7:30PM</v-chip>
-
-                        <v-chip>8:00PM</v-chip>
-
-                        <v-chip>9:00PM</v-chip>
-                    </v-chip-group>
-                    </v-card-text>
 
                 </v-card>
               </v-sheet>

@@ -2169,46 +2169,150 @@ var render = function render() {
     }
   }, [_vm._v("Pelouro de De destribuição Comercial e Informatica")])])], 1)], 1), _vm._v(" "), _c("v-divider", {
     staticClass: "mx-4"
-  }), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-card-title", [_vm._v("\n                            Informação pessoal\n                        ")]), _vm._v(" "), _c("v-btn", {
+  }), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-card-title", [_vm._v("\n                                Informação pessoal\n                            ")]), _vm._v(" "), _c("v-btn", {
     staticClass: "ma-4",
     attrs: {
       outlined: "",
       color: "indigo",
       small: ""
     }
-  }, [_c("v-icon", [_vm._v("mdi-pencil")]), _vm._v("\n                            Editar\n                        ")], 1)], 1), _vm._v(" "), _c("v-row", {
+  }, [_c("v-icon", {
+    attrs: {
+      small: ""
+    }
+  }, [_vm._v("mdi-pencil")]), _vm._v("\n                                Editar\n                            ")], 1)], 1), _vm._v(" "), _c("v-row", {
     staticClass: "mx-0",
     attrs: {
       align: "center"
     }
-  }, [_c("v-rating", {
+  }, [_c("v-col", {
     attrs: {
-      value: 4.5,
-      color: "amber",
-      dense: "",
-      "half-increments": "",
-      readonly: "",
-      size: "14"
+      cols: "1"
     }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "grey--text ms-4"
-  }, [_vm._v("\n                    4.5 (413)\n                    ")])], 1), _vm._v(" "), _c("div", {
-    staticClass: "my-4 text-subtitle-1"
-  }, [_vm._v("\n                    $ • Italian, Cafe\n                ")]), _vm._v(" "), _c("div", [_vm._v("Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.")])], 1), _vm._v(" "), _c("v-divider", {
+  }, [_c("v-icon", {
+    staticStyle: {
+      "margin-top": "2px"
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tmdi-cake-variant\n\t\t\t\t\t\t\t\t\t\t\t\t\t")])], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "8"
+    }
+  }, [_c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("12/01/1997")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small",
+      "margin-top": "-20px"
+    }
+  }, [_vm._v("27 Anos")])])], 1), _vm._v(" "), _c("v-row", {
+    staticClass: "mx-0",
+    attrs: {
+      align: "center"
+    }
+  }, [_c("v-col", {
+    attrs: {
+      cols: "1"
+    }
+  }, [_c("v-icon", [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tmdi-account-box\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")])], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "8"
+    }
+  }, [_c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("MOÇAMBICANO")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("MASCULINO")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("NUIT: 123456789")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("DOCUMENTO: 123455656")]), _c("br")])], 1), _vm._v(" "), _c("v-row", {
+    staticClass: "mx-0",
+    attrs: {
+      align: "center"
+    }
+  }, [_c("v-col", {
+    attrs: {
+      cols: "1"
+    }
+  }, [_c("v-icon", [_vm._v(" mdi-map-marker")])], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "8"
+    }
+  }, [_c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("Cidade de Maputo")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("Endereço, Maputo Magoanine")]), _c("br")])], 1), _vm._v(" "), _c("v-row", {
+    staticClass: "mx-0",
+    attrs: {
+      align: "center"
+    }
+  }, [_c("v-col", {
+    attrs: {
+      cols: "1"
+    }
+  }, [_c("v-icon", [_vm._v(" mdi-cellphone")])], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "8"
+    }
+  }, [_c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("841212121")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("841212121")]), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("841212121")]), _c("br")])], 1), _vm._v(" "), _c("v-row", {
+    staticClass: "mx-0",
+    attrs: {
+      align: "center"
+    }
+  }, [_c("v-col", {
+    attrs: {
+      cols: "1"
+    }
+  }, [_c("v-icon", [_vm._v(" mdi-email")])], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "8"
+    }
+  }, [_c("span", {
+    staticClass: "grey--text ms-4",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("gersonjfmaoze@gmail.com")]), _c("br")])], 1)], 1), _vm._v(" "), _c("v-divider", {
     staticClass: "mx-4"
-  }), _vm._v(" "), _c("v-card-title", [_vm._v("Tonight's availability")]), _vm._v(" "), _c("v-card-text", [_c("v-chip-group", {
-    attrs: {
-      "active-class": "deep-purple accent-4 white--text",
-      column: ""
-    },
-    model: {
-      value: _vm.selection,
-      callback: function callback($$v) {
-        _vm.selection = $$v;
-      },
-      expression: "selection"
-    }
-  }, [_c("v-chip", [_vm._v("5:30PM")]), _vm._v(" "), _c("v-chip", [_vm._v("7:30PM")]), _vm._v(" "), _c("v-chip", [_vm._v("8:00PM")]), _vm._v(" "), _c("v-chip", [_vm._v("9:00PM")])], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-col", [_c("v-sheet", {
+  })], 1)], 1)], 1), _vm._v(" "), _c("v-col", [_c("v-sheet", {
     attrs: {
       "min-height": "70vh",
       rounded: "lg"
