@@ -2169,7 +2169,7 @@ var render = function render() {
     }
   }, [_vm._v("Pelouro de De destribuição Comercial e Informatica")])])], 1)], 1), _vm._v(" "), _c("v-divider", {
     staticClass: "mx-4"
-  }), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-card-title", [_vm._v("\n                                Informação pessoal\n                            ")]), _vm._v(" "), _c("v-btn", {
+  }), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-card-title", [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tDados Pessoais\n                            ")]), _vm._v(" "), _c("v-btn", {
     staticClass: "ma-4",
     attrs: {
       outlined: "",
@@ -2317,7 +2317,52 @@ var render = function render() {
       "min-height": "70vh",
       rounded: "lg"
     }
-  })], 1)], 1)], 1)], 1)], 1);
+  }, [_c("v-card", [_c("v-row", [_c("v-card-title", [_vm._v("Dados Empresariais\n                      ")]), _vm._v(" "), _c("v-btn", {
+    staticClass: "ma-4",
+    attrs: {
+      outlined: "",
+      color: "indigo",
+      small: ""
+    }
+  }, [_c("v-icon", {
+    attrs: {
+      small: ""
+    }
+  }, [_vm._v("mdi-pencil")]), _vm._v("\n                          Editar\n                      ")], 1)], 1), _vm._v(" "), _c("v-row", [_c("v-card-text", [_c("div", {
+    staticClass: "font-weight-bold ml-8 mb-2"
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tCodigo Trabalhador: 001231\n\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c("v-timeline", {
+    attrs: {
+      "align-top": "",
+      dense: ""
+    }
+  }, [_c("v-timeline-item", {
+    staticStyle: {
+      "margin-top": "-30px"
+    },
+    attrs: {
+      color: "orange",
+      small: ""
+    }
+  }, [_c("div", {
+    staticClass: "grey--text",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\tPelouro de De destribuição Comercial e Informatica • GCA-Gab. do Conselho de Administração\n\t\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c("div", {
+    staticClass: "grey--text",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t• GCA-Serviços de Apoio\n\t\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c("div", {
+    staticClass: "font-weight-normal"
+  }, [_c("strong", [_vm._v("Gerson Josefino Maoze")]), _vm._v(" • "), _c("span", {
+    staticClass: "grey--text"
+  }, [_vm._v(" Licenciado ")])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Support 1")])]), _vm._v(" "), _c("div", [_c("div", {
+    staticClass: "font-weight-normal",
+    staticStyle: {
+      "font-size": "small"
+    }
+  }, [_c("strong", [_vm._v("Data inicio")]), _vm._v(" • 23/12/2019 - "), _c("strong", [_vm._v("Data inicio")]), _vm._v(" • 23/12/2027\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Reforma")]), _vm._v(" • 20/01/2021")])])])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

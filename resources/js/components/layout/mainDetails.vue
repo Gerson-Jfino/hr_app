@@ -36,7 +36,7 @@
                     <v-card-text>
                         <v-row>
                             <v-card-title>
-                                Informação pessoal
+															Dados Pessoais
                             </v-card-title>
                             <v-btn  class="ma-4"
                                 outlined
@@ -46,6 +46,7 @@
                                 Editar
                             </v-btn>
                         </v-row>
+
                     <!-- <v-row
                         align="center"
                         class="mx-0"
@@ -137,7 +138,53 @@
                 min-height="70vh"
                 rounded="lg"
               >
-                <!--  -->
+                <v-card>
+									<v-row>
+                      <v-card-title>Dados Empresariais
+                      </v-card-title>
+                      <v-btn  class="ma-4"
+                          outlined
+                          color="indigo"
+                          small>
+                          <v-icon small>mdi-pencil</v-icon>
+                          Editar
+                      </v-btn>
+                  </v-row>
+									<v-row>
+										<v-card-text>
+											<div class="font-weight-bold ml-8 mb-2">
+												Codigo Trabalhador: 001231
+											</div>
+											<v-timeline
+												align-top
+												dense
+											>
+												<v-timeline-item
+													color="orange"
+													small
+													style="margin-top: -30px;"
+												>
+												<div class="grey--text" style="font-size: small;">
+													Pelouro de De destribuição Comercial e Informatica &#x2022; GCA-Gab. do Conselho de Administração
+												</div>
+												<div class="grey--text" style="font-size: small;">
+													&#x2022; GCA-Serviços de Apoio
+												</div>
+												<div class="font-weight-normal">
+													<strong>Gerson Josefino Maoze</strong> &#x2022; <span class="grey--text"> Licenciado </span>
+												</div>
+													<div><strong>Support 1</strong></div>
+													<div>
+														<div class="font-weight-normal" style="font-size: small;">
+															<strong>Data inicio</strong> &#x2022; 23/12/2019 - <strong>Data inicio</strong> &#x2022; 23/12/2027
+														</div>
+														<div><strong>Reforma</strong> &#x2022; 20/01/2021</div>
+													</div>
+												</v-timeline-item>
+											</v-timeline>
+										</v-card-text>
+									</v-row>
+								</v-card>
               </v-sheet>
             </v-col>
           </v-row>
