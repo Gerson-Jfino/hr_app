@@ -12,11 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('categoria')->insert([
-        //     ["id"=>"1","name"=>"Support", "created_at"=>null,"updated_at"=> null],
-        //     ["id"=>"2","name"=>"Profissional II", "created_at"=>null,"updated_at"=> null],
-        //     ["id"=>"3","name"=>"Profissional I","created_at"=>null,"updated_at"=> null],
-        //     ["id"=>"4","name"=>"Senior", "created_at"=>null,"updated_at"=> null]
+        // DB::table('situation')->insert([
+        //     ["id" => 1,"name" =>"Activo"],
+        //     ["id" => 2,"name" =>"Reforma"],
+        //     ["id" => 3,"name" =>"Falecimento"],
+        //     ["id" => 4,"name" =>"Recisão"],
+        //     ["id" => 5,"name" =>"Despedimento"],
+        //     ["id" => 6,"name" =>"Fim do Contrato"]
         // ]);
 
     }

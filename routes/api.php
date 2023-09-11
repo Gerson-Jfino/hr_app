@@ -18,9 +18,7 @@ use App\Sector;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/test', function () {
-    return Employee::get();
-});
+Route::get('/pelouros', 'profileController@getPelouros');
 Route::get('/testsecto', function () {
     return Sector::with(['regiao', 'UnidadeOrganica'])->get();
 });
