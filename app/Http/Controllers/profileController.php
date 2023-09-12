@@ -28,4 +28,7 @@ class profileController extends Controller
             'situation' => $situation
         ], 200);
     }
+    public function storeCompanyData(Request $request) {
+        $request->validate([]);
+    }
 }

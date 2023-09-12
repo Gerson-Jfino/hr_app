@@ -13,11 +13,13 @@ class CreateRegiaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('regiao', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('regiao')){
+            Schema::create('regiao', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

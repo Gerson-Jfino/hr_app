@@ -13,15 +13,17 @@ class CreateSectorTable extends Migration
      */
     public function up()
     {
-        Schema::create('sector', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('uni_org_id');
-            $table->foreign('uni_org_id')->references('id')->on('unidade_organica');
-            $table->unsignedInteger('regiao_id');
-            $table->foreign('regiao_id')->references('id')->on('regiao');
-            $table->string('name');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('sector')){
+            Schema::create('sector', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedInteger('uni_org_id');
+                $table->foreign('uni_org_id')->references('id')->on('unidade_organica');
+                $table->unsignedInteger('regiao_id');
+                $table->foreign('regiao_id')->references('id')->on('regiao');
+                $table->string('name');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

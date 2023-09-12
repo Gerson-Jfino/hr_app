@@ -13,11 +13,13 @@ class CreateCategoriaTable extends Migration
      */
     public function up()
     {
-        Schema::create('categoria', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('categoria')){
+            Schema::create('categoria', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

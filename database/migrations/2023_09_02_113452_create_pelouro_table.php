@@ -14,13 +14,13 @@ class CreatePelouroTable extends Migration
     public function up()
     {
         if(!Schema::hasTable('pelouro')){
-        Schema::create('pelouro', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('area_id');
-            $table->foreign('area_id')->references('id')->on('area');
-            $table->string('name');
-            $table->timestamps();
-        });
+            Schema::create('pelouro', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedInteger('area_id');
+                $table->foreign('area_id')->references('id')->on('area');
+                $table->string('name');
+                $table->timestamps();
+            });
         }
     }
 

@@ -14,13 +14,15 @@ class CreateUnidadeOrganicaTable extends Migration
     public function up()
     {
 
-        Schema::create('unidade_organica', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('pelouro_id');
-            $table->foreign('pelouro_id')->references('id')->on('pelouro');
-            $table->string('name');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('unidade_organica')){
+            Schema::create('unidade_organica', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedInteger('pelouro_id');
+                $table->foreign('pelouro_id')->references('id')->on('pelouro');
+                $table->string('name');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

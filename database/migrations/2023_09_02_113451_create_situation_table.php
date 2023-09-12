@@ -14,11 +14,11 @@ class CreateSituationTable extends Migration
     public function up()
     {
         if(!Schema::hasTable('situation')){
-        Schema::create('situation', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
+            Schema::create('situation', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->timestamps();
+            });
         }
     }
 

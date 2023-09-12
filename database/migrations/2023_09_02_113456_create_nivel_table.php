@@ -13,11 +13,13 @@ class CreateNivelTable extends Migration
      */
     public function up()
     {
-        Schema::create('nivel', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('nivel')){
+            Schema::create('nivel', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
