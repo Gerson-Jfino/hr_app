@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Employee;
-use App\Sector;
+use App\PersonalData;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,5 +23,5 @@ Route::post('/employe/company-data', 'profileController@storeCompanyData');
 Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
 Route::get('/me', 'profileController@meAdapter');
 Route::get('/testsecto', function () {
-    return Sector::with(['regiao', 'UnidadeOrganica'])->get();
+    return PersonalData::get();
 });
