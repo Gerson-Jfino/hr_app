@@ -3201,7 +3201,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "small"
     }
-  }, [_c("strong", [_vm._v("Data inicio")]), _vm._v(" • " + _vm._s(_vm.employee.data_admissao) + " -\n                          "), _c("strong", [_vm._v("Data inicio")]), _vm._v(" • " + _vm._s(_vm.employee.data_fim) + "\n                        ")]), _vm._v(" "), _c("div", [_c("strong", [_vm._v(_vm._s((_vm$employee6 = _vm.employee) === null || _vm$employee6 === void 0 || (_vm$employee6 = _vm$employee6.situation) === null || _vm$employee6 === void 0 ? void 0 : _vm$employee6.name))]), _vm._v(" • " + _vm._s(_vm.employee.data_situacao) + "\n                        ")])])])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1);
+  }, [_c("strong", [_vm._v("Data inicio")]), _vm._v(" • " + _vm._s(_vm.employee.data_admissao) + " -\n                          "), _c("strong", [_vm._v("Data inicio")]), _vm._v(" • " + _vm._s(_vm.employee.data_fim) + "\n                        ")]), _vm._v(" "), _c("div", [_c("strong", [_vm._v(_vm._s((_vm$employee6 = _vm.employee) === null || _vm$employee6 === void 0 || (_vm$employee6 = _vm$employee6.situation) === null || _vm$employee6 === void 0 ? void 0 : _vm$employee6.name))]), _vm._v(" • " + _vm._s(_vm.employee.data_situacao) + "\n                        ")]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("SALARIO: ")]), _vm._v(" " + _vm._s(_vm.employee.salario) + "\n                        ")])])])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

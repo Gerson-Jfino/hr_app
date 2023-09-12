@@ -254,6 +254,9 @@
                           <div>
                             <strong>{{ employee?.situation?.name }}</strong> &#x2022; {{ employee.data_situacao }}
                           </div>
+                          <div>
+                            <strong>SALARIO: </strong> {{ employee.salario }}
+                          </div>
                         </div>
                       </v-timeline-item>
                     </v-timeline>
