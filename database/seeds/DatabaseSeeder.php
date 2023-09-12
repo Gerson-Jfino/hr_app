@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
         //     ["id" => 5,"name" =>"Despedimento"],
         //     ["id" => 6,"name" =>"Fim do Contrato"]
         // ]);
-
+        DB::table('users')->insert([
+            'id' => 1,
+            'name' => 'Gerson Maoze',
+            'email' => 'gersonjfmaoze@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
     }
 }

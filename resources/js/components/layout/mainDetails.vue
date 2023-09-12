@@ -214,6 +214,7 @@
                       <v-row> Ficha de Dados Empresariais </v-row>
                     </v-toolbar>
                     <company-data-dialog
+                        :personal-data-form="employee"
                       @closeCompanyDialig="closeCompanyDialig"
                     />
                   </v-dialog>
@@ -268,6 +269,7 @@
 
 <script>
 import axios from 'axios'
+import { BASE_URL } from '../../config/api'
 import companyDataDialog from "./companyDataDialog.vue";
 import personlDataDialog from "./personlDataDialog.vue";
 export default {
@@ -276,7 +278,24 @@ export default {
     links: ["Dashboard", "Messages", "Profile", "Updates"],
     dialog: false,
     dialogCompany: true,
+    employee: {
+        id: null,
+        nome_completo: "",
+        data_situacao: null,
+        data_admissao: null,
+        data_fim: null,
+        nivel_id: null,
+        situation_id: null,
+        categoria_id: null,
+        pelouro_id: null,
+        uni_org_id: null,
+        sector_id: null,
+        salario: ""
+    }
   }),
+  created() {
+    this.getMe()
+  },
   methods: {
     closePesonalForm() {
       this.dialog = false;
@@ -284,6 +303,13 @@ export default {
     closeCompanyDialig() {
       this.dialogCompany = false;
     },
+    async getMe() {
+        this.$store.state.Loader.loading = true
+        const me = (await axios.get(`${BASE_URL}me`)).data
+        this.employee = me.employee
+        console.log(this.employee);
+        this.$store.state.Loader.loading = false
+    }
   },
 };
 </script>

@@ -17,6 +17,8 @@ class CreateEmployeTable extends Migration
         if(!Schema::hasTable('employe')){
             Schema::create('employe', function (Blueprint $table) {
                 $table->id();
+                $table->unsignedInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users');
                 $table->string('nome_completo');
                 $table->date('data_admissao');
                 $table->date('data_fim')->nullable();
@@ -27,6 +29,8 @@ class CreateEmployeTable extends Migration
                 $table->foreign('pelouro_id')->references('id')->on('pelouro');
                 $table->unsignedInteger('uni_org_id');
                 $table->foreign('uni_org_id')->references('id')->on('unidade_organica');
+                $table->unsignedInteger('sector_id');
+                $table->foreign('sector_id')->references('id')->on('sector');
                 $table->unsignedInteger('categoria_id');
                 $table->foreign('categoria_id')->references('id')->on('categoria');
                 $table->unsignedInteger('nivel_id');

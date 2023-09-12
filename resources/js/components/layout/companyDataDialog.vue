@@ -156,6 +156,7 @@
                             v-model="personalDataForm.categoria_id">
                         </v-select>
                     </v-col>
+
                     <!-- <v-col cols="12" md="4">
                         <v-select
                             label="Sector"
@@ -174,6 +175,14 @@
                             item-value="id"
                             v-model="personalDataForm.nivel_id">
                         </v-select>
+                    </v-col>
+										<v-col cols="12" md="4">
+                        <v-text-field
+                            label="Salario"
+                            outlined
+                            dense
+                            v-model="personalDataForm.salario">
+                        </v-text-field>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -207,17 +216,11 @@
                             dense
                             :items="data.sector_filtered"
                             item-text="name"
-                            item-value="id">
+                            item-value="id"
+														v-model="sector_id">
                         </v-select>
                     </v-col>
-                    <v-col cols="12" md="4">
-                        <v-text-field
-                            label="Salario"
-                            outlined
-                            dense
-                            v-model="personalDataForm.salario">
-                        </v-text-field>
-                    </v-col>
+
                 </v-row>
             </v-container>
         </v-card-text>
@@ -245,22 +248,44 @@
 import Axios from 'axios';
 import { BASE_URL } from '../../config/api'
 export default {
+    props: {
+        personalDataForm: {
+            type: Object,
+            required: false,
+            default() {
+                return {
+                    id: null,
+                    nome_completo: "",
+                    data_situacao: null,
+                    data_admissao: null,
+                    data_fim: null,
+                    nivel_id: null,
+                    situation_id: null,
+                    categoria_id: null,
+                    pelouro_id: null,
+                    uni_org_id: null,
+                    sector_id: null,
+                    salario: ""
+                }
+            }
+        }
+    },
     data() {
         return {
-            personalDataForm: {
-                id: null,
-                nome_completo: "",
-                data_situacao: null,
-                data_admissao: null,
-                data_fim: null,
-                nivel_id: null,
-                situation_id: null,
-                categoria_id: null,
-                pelouro_id: null,
-                uni_org_id: null,
-                sector_id: null,
-                salario: ""
-            },
+            // personalDataForm: {
+            //     id: null,
+            //     nome_completo: "",
+            //     data_situacao: null,
+            //     data_admissao: null,
+            //     data_fim: null,
+            //     nivel_id: null,
+            //     situation_id: null,
+            //     categoria_id: null,
+            //     pelouro_id: null,
+            //     uni_org_id: null,
+            //     sector_id: null,
+            //     salario: ""
+            // },
             pelouro_id: null,
             uni_org_id: null,
             sector_id: null,
@@ -305,12 +330,34 @@ export default {
             this.data.nivel = companyData.data.nivel;
             this.data.categoria = companyData.data.categoria;
             this.data.situation = companyData.data.situation;
+            if (this.pelouro_id !== null) {
+                this.data.uni_org_filtered = this.data.uni_org.filter(uni => uni.pelouro_id == this.pelouro_id)
+            }
+            if (this.uni_org_id !== null) {
+                this.data.sector_filtered = this.data.sector.filter(sec => sec.uni_org_id == this.uni_org_id)
+            }
             this.$store.state.Loader.loading = false
             console.log(companyData.data);
 
         },
         save() {
-            console.log(this.personalDataForm);
+			this.$store.state.Loader.loading = true
+            if (this.personalDataForm.id !== null) {
+                console.log(this.personalDataForm);
+                return
+            }
+			this.personalDataForm.pelouro_id = this.pelouro_id
+			this.personalDataForm.uni_org_id = this.uni_org_id
+			this.personalDataForm.sector_id = this.sector_id
+			Axios.post(`${BASE_URL}employe/company-data`, this.personalDataForm)
+				.then(res => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.log(err);
+				})
+			this.$store.state.Loader.loading = false
+            // console.log(this.personalDataForm);
         }
 
     },
@@ -321,6 +368,13 @@ export default {
         },
         uni_org_id(id) {
             this.data.sector_filtered = this.data.sector.filter(sec => sec.uni_org_id == id)
+        },
+        personalDataForm(personal) {
+            this.pelouro_id = personal.pelouro_id
+            // this.data.uni_org_filtered = this.data.uni_org.filter(uni => uni.pelouro_id == personal.pelouro_id)
+            this.uni_org_id = personal.uni_org_id
+            // this.data.sector_filtered = this.data.sector.filter(sec => sec.uni_org_id == personal.uni_org_id)
+            this.sector_id = personal.sector_id
         }
     }
 }
