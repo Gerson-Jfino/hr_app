@@ -215,14 +215,15 @@
                     </v-toolbar>
                     <company-data-dialog
                         :personal-data-form="employee"
-                      @closeCompanyDialig="closeCompanyDialig"
+                        @savedCloseDialog="savedCompanyDialog"
+                        @closeCompanyDialig="closeCompanyDialig"
                     />
                   </v-dialog>
                 </v-row>
                 <v-row>
                   <v-card-text>
                     <div class="font-weight-bold ml-8 mb-2">
-                      Codigo Trabalhador: 001231
+                      Codigo Trabalhador: {{ employee.id }}
                     </div>
                     <v-timeline align-top dense>
                       <v-timeline-item
@@ -231,27 +232,27 @@
                         style="margin-top: -30px"
                       >
                         <div class="grey--text" style="font-size: small">
-                          Pelouro de De destribuição Comercial e Informatica
-                          &#x2022; GCA-Gab. do Conselho de Administração
+                          {{ employee?.pelouro?.name }}
+                          &#x2022; {{ employee?.uni_org?.name }}
                         </div>
                         <div class="grey--text" style="font-size: small">
-                          &#x2022; GCA-Serviços de Apoio
+                          &#x2022; {{ employee?.sector?.name }}
                         </div>
                         <div class="font-weight-normal">
                           <strong>Gerson Josefino Maoze</strong> &#x2022;
-                          <span class="grey--text"> Licenciado </span>
+                          <span class="grey--text"> {{ employee?.nivel?.name }} </span>
                         </div>
-                        <div><strong>Support 1</strong></div>
+                        <div><strong>{{ employee?.categoria?.name }}</strong></div>
                         <div>
                           <div
                             class="font-weight-normal"
                             style="font-size: small"
                           >
-                            <strong>Data inicio</strong> &#x2022; 23/12/2019 -
-                            <strong>Data inicio</strong> &#x2022; 23/12/2027
+                            <strong>Data inicio</strong> &#x2022; {{ employee.data_admissao }} -
+                            <strong>Data inicio</strong> &#x2022; {{ employee.data_fim }}
                           </div>
                           <div>
-                            <strong>Reforma</strong> &#x2022; 20/01/2021
+                            <strong>{{ employee?.situation?.name }}</strong> &#x2022; {{ employee.data_situacao }}
                           </div>
                         </div>
                       </v-timeline-item>
@@ -277,7 +278,7 @@ export default {
   data: () => ({
     links: ["Dashboard", "Messages", "Profile", "Updates"],
     dialog: false,
-    dialogCompany: true,
+    dialogCompany: false,
     employee: {
         id: null,
         nome_completo: "",
@@ -302,6 +303,10 @@ export default {
     },
     closeCompanyDialig() {
       this.dialogCompany = false;
+    },
+    savedCompanyDialog() {
+        this.dialogCompany = false;
+        this.getMe()
     },
     async getMe() {
         this.$store.state.Loader.loading = true

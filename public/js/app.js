@@ -2143,19 +2143,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     save: function save() {
       this.$store.state.Loader.loading = true;
-      if (this.personalDataForm.id !== null) {
-        console.log(this.personalDataForm);
-        return;
-      }
       this.personalDataForm.pelouro_id = this.pelouro_id;
       this.personalDataForm.uni_org_id = this.uni_org_id;
       this.personalDataForm.sector_id = this.sector_id;
+      if (this.personalDataForm.id !== null) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("".concat(_config_api__WEBPACK_IMPORTED_MODULE_1__["BASE_URL"], "employe/company-data/").concat(this.personalDataForm.id), this.personalDataForm).then(function (res) {
+          console.log(res);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+        this.$store.state.Loader.loading = false;
+        this.$emit('savedCloseDialog');
+        return;
+      }
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("".concat(_config_api__WEBPACK_IMPORTED_MODULE_1__["BASE_URL"], "employe/company-data"), this.personalDataForm).then(function (res) {
         console.log(res);
       })["catch"](function (err) {
         console.log(err);
       });
       this.$store.state.Loader.loading = false;
+      this.$emit('savedCloseDialog');
       // console.log(this.personalDataForm);
     }
   },
@@ -2215,7 +2222,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       links: ["Dashboard", "Messages", "Profile", "Updates"],
       dialog: false,
-      dialogCompany: true,
+      dialogCompany: false,
       employee: {
         id: null,
         nome_completo: "",
@@ -2241,6 +2248,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     closeCompanyDialig: function closeCompanyDialig() {
       this.dialogCompany = false;
+    },
+    savedCompanyDialog: function savedCompanyDialog() {
+      this.dialogCompany = false;
+      this.getMe();
     },
     getMe: function getMe() {
       var _this = this;
@@ -2831,6 +2842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function render() {
+  var _vm$employee, _vm$employee2, _vm$employee3, _vm$employee4, _vm$employee5, _vm$employee6;
   var _vm = this,
     _c = _vm._self._c;
   return _c("v-app", {
@@ -3128,11 +3140,12 @@ var render = function render() {
       "personal-data-form": _vm.employee
     },
     on: {
+      savedCloseDialog: _vm.savedCompanyDialog,
       closeCompanyDialig: _vm.closeCompanyDialig
     }
   })], 1)], 1), _vm._v(" "), _c("v-row", [_c("v-card-text", [_c("div", {
     staticClass: "font-weight-bold ml-8 mb-2"
-  }, [_vm._v("\n                    Codigo Trabalhador: 001231\n                  ")]), _vm._v(" "), _c("v-timeline", {
+  }, [_vm._v("\n                    Codigo Trabalhador: " + _vm._s(_vm.employee.id) + "\n                  ")]), _vm._v(" "), _c("v-timeline", {
     attrs: {
       "align-top": "",
       dense: ""
@@ -3150,21 +3163,21 @@ var render = function render() {
     staticStyle: {
       "font-size": "small"
     }
-  }, [_vm._v("\n                        Pelouro de De destribuição Comercial e Informatica\n                        • GCA-Gab. do Conselho de Administração\n                      ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                        " + _vm._s((_vm$employee = _vm.employee) === null || _vm$employee === void 0 || (_vm$employee = _vm$employee.pelouro) === null || _vm$employee === void 0 ? void 0 : _vm$employee.name) + "\n                        • " + _vm._s((_vm$employee2 = _vm.employee) === null || _vm$employee2 === void 0 || (_vm$employee2 = _vm$employee2.uni_org) === null || _vm$employee2 === void 0 ? void 0 : _vm$employee2.name) + "\n                      ")]), _vm._v(" "), _c("div", {
     staticClass: "grey--text",
     staticStyle: {
       "font-size": "small"
     }
-  }, [_vm._v("\n                        • GCA-Serviços de Apoio\n                      ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                        • " + _vm._s((_vm$employee3 = _vm.employee) === null || _vm$employee3 === void 0 || (_vm$employee3 = _vm$employee3.sector) === null || _vm$employee3 === void 0 ? void 0 : _vm$employee3.name) + "\n                      ")]), _vm._v(" "), _c("div", {
     staticClass: "font-weight-normal"
   }, [_c("strong", [_vm._v("Gerson Josefino Maoze")]), _vm._v(" •\n                        "), _c("span", {
     staticClass: "grey--text"
-  }, [_vm._v(" Licenciado ")])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Support 1")])]), _vm._v(" "), _c("div", [_c("div", {
+  }, [_vm._v(" " + _vm._s((_vm$employee4 = _vm.employee) === null || _vm$employee4 === void 0 || (_vm$employee4 = _vm$employee4.nivel) === null || _vm$employee4 === void 0 ? void 0 : _vm$employee4.name) + " ")])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v(_vm._s((_vm$employee5 = _vm.employee) === null || _vm$employee5 === void 0 || (_vm$employee5 = _vm$employee5.categoria) === null || _vm$employee5 === void 0 ? void 0 : _vm$employee5.name))])]), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "font-weight-normal",
     staticStyle: {
       "font-size": "small"
     }
-  }, [_c("strong", [_vm._v("Data inicio")]), _vm._v(" • 23/12/2019 -\n                          "), _c("strong", [_vm._v("Data inicio")]), _vm._v(" • 23/12/2027\n                        ")]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Reforma")]), _vm._v(" • 20/01/2021\n                        ")])])])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1);
+  }, [_c("strong", [_vm._v("Data inicio")]), _vm._v(" • " + _vm._s(_vm.employee.data_admissao) + " -\n                          "), _c("strong", [_vm._v("Data inicio")]), _vm._v(" • " + _vm._s(_vm.employee.data_fim) + "\n                        ")]), _vm._v(" "), _c("div", [_c("strong", [_vm._v(_vm._s((_vm$employee6 = _vm.employee) === null || _vm$employee6 === void 0 || (_vm$employee6 = _vm$employee6.situation) === null || _vm$employee6 === void 0 ? void 0 : _vm$employee6.name))]), _vm._v(" • " + _vm._s(_vm.employee.data_situacao) + "\n                        ")])])])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

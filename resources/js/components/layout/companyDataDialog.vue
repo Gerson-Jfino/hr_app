@@ -342,13 +342,21 @@ export default {
         },
         save() {
 			this.$store.state.Loader.loading = true
-            if (this.personalDataForm.id !== null) {
-                console.log(this.personalDataForm);
-                return
-            }
 			this.personalDataForm.pelouro_id = this.pelouro_id
 			this.personalDataForm.uni_org_id = this.uni_org_id
 			this.personalDataForm.sector_id = this.sector_id
+            if (this.personalDataForm.id !== null) {
+                Axios.post(`${BASE_URL}employe/company-data/${this.personalDataForm.id}`, this.personalDataForm)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                this.$store.state.Loader.loading = false
+                this.$emit('savedCloseDialog')
+                return
+            }
 			Axios.post(`${BASE_URL}employe/company-data`, this.personalDataForm)
 				.then(res => {
 					console.log(res);
@@ -357,6 +365,7 @@ export default {
 					console.log(err);
 				})
 			this.$store.state.Loader.loading = false
+            this.$emit('savedCloseDialog')
             // console.log(this.personalDataForm);
         }
 

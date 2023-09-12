@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/pelouros', 'profileController@getPelouros');
 Route::post('/employe/company-data', 'profileController@storeCompanyData');
+Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
 Route::get('/me', 'profileController@meAdapter');
 Route::get('/testsecto', function () {
     return Sector::with(['regiao', 'UnidadeOrganica'])->get();

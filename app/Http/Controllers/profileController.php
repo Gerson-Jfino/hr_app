@@ -38,9 +38,9 @@ class profileController extends Controller
         ], 200);
     }
     public function storeCompanyData(Request $request) {
-        DB::beginTransaction();
         $input = $request->all();
         $input['user_id'] = 1;
+        DB::beginTransaction();
         try {
             $employee = $this->employee->create($input);
             // $employee->user_id = 1;
@@ -52,8 +52,23 @@ class profileController extends Controller
             return response()->json($e->message(), 500);
         }
     }
+    public function updateCompanyData($id, Request $request) {
+        $input = $request->all();
+        $input['user_id'] = 1;
+        $employee = $this->employee->find($id)->first();
+        DB::beginTransaction();
+        try {
+            $employee->update($input);
+            $employee->save();
+            DB::commit();
+            return response()->json("Data updated", 200);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
     public function meAdapter() {
-        $user = User::where('id', 1)->with('employee')->first();
+        $user = User::where('id', 1)->with('employee', 'employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
         return response()->json($user, 200);
     }
 }
