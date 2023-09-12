@@ -240,9 +240,9 @@
                         </div>
                         <div class="font-weight-normal">
                           <strong>Gerson Josefino Maoze</strong> &#x2022;
-                          <span class="grey--text"> {{ employee?.nivel?.name }} </span>
+                          <span class="grey--text"> {{ employee?.categoria?.name }} </span>
                         </div>
-                        <div><strong>{{ employee?.categoria?.name }}</strong></div>
+                        <div><strong>{{ employee?.nivel?.name }}</strong></div>
                         <div>
                           <div
                             class="font-weight-normal"
@@ -312,7 +312,7 @@ export default {
         this.$store.state.Loader.loading = true
         const me = (await axios.get(`${BASE_URL}me`)).data
         this.employee = me.employee
-        console.log(this.employee);
+        // console.log(this.employee);
         this.$store.state.Loader.loading = false
     }
   },

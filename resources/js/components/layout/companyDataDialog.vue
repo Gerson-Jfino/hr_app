@@ -227,18 +227,28 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
-            text
+            class="ma-4"
+            color="error"
+            outlined
+            small
             @click="closeDialogCompany()"
           >
-            Close
+            <v-icon small>
+                mdi-cancel
+            </v-icon>
+            Cancelar
           </v-btn>
           <v-btn
-            color="blue darken-1"
-            text
+            class="ma-4"
+            outlined
+            color="success"
+            small
             @click="save"
           >
-            Save
+            <v-icon small>
+                mdi-checkbox-marked-circle
+            </v-icon>
+            Guardar
           </v-btn>
         </v-card-actions>
   </v-card>
@@ -309,6 +319,17 @@ export default {
         }
     },
     created() {
+        if (this.personalDataForm.id !== null) {
+            if (this.personalDataForm.pelouro_id !== null) {
+                this.pelouro_id = this.personalDataForm.pelouro_id
+            }
+            if (this.personalDataForm.uni_org_id !== null) {
+                this.uni_org_id = this.personalDataForm.uni_org_id
+            }
+            if (this.personalDataForm.pelouro_id !== null) {
+                this.sector_id = this.personalDataForm.sector_id
+            }
+        }
         this.getCompanyData()
     },
     computed: {
@@ -384,6 +405,7 @@ export default {
             this.uni_org_id = personal.uni_org_id
             // this.data.sector_filtered = this.data.sector.filter(sec => sec.uni_org_id == personal.uni_org_id)
             this.sector_id = personal.sector_id
+            console.log('any');
         }
     }
 }

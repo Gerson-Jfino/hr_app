@@ -2088,6 +2088,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   created: function created() {
+    if (this.personalDataForm.id !== null) {
+      if (this.personalDataForm.pelouro_id !== null) {
+        this.pelouro_id = this.personalDataForm.pelouro_id;
+      }
+      if (this.personalDataForm.uni_org_id !== null) {
+        this.uni_org_id = this.personalDataForm.uni_org_id;
+      }
+      if (this.personalDataForm.pelouro_id !== null) {
+        this.sector_id = this.personalDataForm.sector_id;
+      }
+    }
     this.getCompanyData();
   },
   computed: {
@@ -2185,6 +2196,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.uni_org_id = personal.uni_org_id;
       // this.data.sector_filtered = this.data.sector.filter(sec => sec.uni_org_id == personal.uni_org_id)
       this.sector_id = personal.sector_id;
+      console.log('any');
     }
   }
 });
@@ -2266,9 +2278,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               me = _context.sent.data;
               _this.employee = me.employee;
-              console.log(_this.employee);
+              // console.log(this.employee);
               _this.$store.state.Loader.loading = false;
-            case 7:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -2805,24 +2817,36 @@ var render = function render() {
       expression: "sector_id"
     }
   })], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-card-actions", [_c("v-spacer"), _vm._v(" "), _c("v-btn", {
+    staticClass: "ma-4",
     attrs: {
-      color: "blue darken-1",
-      text: ""
+      color: "error",
+      outlined: "",
+      small: ""
     },
     on: {
       click: function click($event) {
         return _vm.closeDialogCompany();
       }
     }
-  }, [_vm._v("\n            Close\n          ")]), _vm._v(" "), _c("v-btn", {
+  }, [_c("v-icon", {
     attrs: {
-      color: "blue darken-1",
-      text: ""
+      small: ""
+    }
+  }, [_vm._v("\n                mdi-cancel\n            ")]), _vm._v("\n            Cancelar\n          ")], 1), _vm._v(" "), _c("v-btn", {
+    staticClass: "ma-4",
+    attrs: {
+      outlined: "",
+      color: "success",
+      small: ""
     },
     on: {
       click: _vm.save
     }
-  }, [_vm._v("\n            Save\n          ")])], 1)], 1);
+  }, [_c("v-icon", {
+    attrs: {
+      small: ""
+    }
+  }, [_vm._v("\n                mdi-checkbox-marked-circle\n            ")]), _vm._v("\n            Guardar\n          ")], 1)], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -3172,7 +3196,7 @@ var render = function render() {
     staticClass: "font-weight-normal"
   }, [_c("strong", [_vm._v("Gerson Josefino Maoze")]), _vm._v(" •\n                        "), _c("span", {
     staticClass: "grey--text"
-  }, [_vm._v(" " + _vm._s((_vm$employee4 = _vm.employee) === null || _vm$employee4 === void 0 || (_vm$employee4 = _vm$employee4.nivel) === null || _vm$employee4 === void 0 ? void 0 : _vm$employee4.name) + " ")])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v(_vm._s((_vm$employee5 = _vm.employee) === null || _vm$employee5 === void 0 || (_vm$employee5 = _vm$employee5.categoria) === null || _vm$employee5 === void 0 ? void 0 : _vm$employee5.name))])]), _vm._v(" "), _c("div", [_c("div", {
+  }, [_vm._v(" " + _vm._s((_vm$employee4 = _vm.employee) === null || _vm$employee4 === void 0 || (_vm$employee4 = _vm$employee4.categoria) === null || _vm$employee4 === void 0 ? void 0 : _vm$employee4.name) + " ")])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v(_vm._s((_vm$employee5 = _vm.employee) === null || _vm$employee5 === void 0 || (_vm$employee5 = _vm$employee5.nivel) === null || _vm$employee5 === void 0 ? void 0 : _vm$employee5.name))])]), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "font-weight-normal",
     staticStyle: {
       "font-size": "small"
