@@ -11,6 +11,8 @@ use App\Categoria;
 use App\Situation;
 use App\Employee;
 use App\User;
+use App\PersonalData;
+use App\NivelAcademico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,8 +20,12 @@ use Illuminate\Support\Facades\DB;
 class profileController extends Controller
 {
     private $employee;
-    public function __construct(Employee $employee) {
+    private $personal_data;
+    private $nivel_academico;
+    public function __construct(Employee $employee, PersonalData $personal_data, NivelAcademico $nivel_academico) {
         $this->employee = $employee;
+        $this->personal_data = $personal_data;
+        $this->nivel_academico = $nivel_academico;
     }
     public function getPelouros() {
         $pelouros = Pelouro::get(['id', 'name']);
@@ -68,7 +74,77 @@ class profileController extends Controller
         }
     }
     public function meAdapter() {
-        $user = User::where('id', 1)->with('employee', 'employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
+        $user = User::where('id', 1)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
         return response()->json($user, 200);
+    }
+    public function storePesonalData(Request $request) {
+        $input = $request->all();
+        $input['user_id'] = 1;
+        DB::beginTransaction();
+        try {
+            $personal_data = $this->personal_data->create($input);
+            $personal_data->save();
+            DB::commit();
+            return response()->json("Personal Data saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
+    public function updatePesonalData($id, Request $request) {
+        $input = $request->all();
+        $input['user_id'] = 1;
+        $personal_data = $this->personal_data->find($id)->first();
+        DB::beginTransaction();
+        try {
+            $personal_data->update($input);
+            $personal_data->save();
+            DB::commit();
+            return response()->json("Data updated", 200);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
+    public function storeNivelAcademicoData(Request $request) {
+        $input = $request->only(['nivel_id', 'curso', 'instituicao']);
+        $input['user_id'] = 1;
+        DB::beginTransaction();
+        try {
+            if ($request->anexo) {
+                $path = 'uploads';
+                $document = time().'.' . $request->anexo->getClientOriginalExtension();
+                $request->anexo->move(public_path($path), $document);
+                $input['anexo'] = $path . '/' . $document;
+            }
+            $nivel_academico = $this->nivel_academico->create($input);
+            $nivel_academico->save();
+            DB::commit();
+            return response()->json("Nivel academico saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
+    public function updateNivelAcademicoData($id, Request $request) {
+        $input = $request->only(['nivel_id', 'curso', 'instituicao']);
+        $input['user_id'] = 1;
+        $nivel_academico = $this->nivel_academico->find($id)->first();
+        DB::beginTransaction();
+        try {
+            if ($request->anexo) {
+                $path = 'uploads';
+                $document = time().'.' . $request->anexo->getClientOriginalExtension();
+                $request->anexo->move(public_path($path), $document);
+                $input['anexo'] = $path . '/' . $document;
+            }
+            $nivel_academico->update($input);
+            $nivel_academico->save();
+            DB::commit();
+            return response()->json("Nivel academico saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
     }
 }

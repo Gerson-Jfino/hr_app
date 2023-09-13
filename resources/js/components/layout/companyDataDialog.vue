@@ -369,24 +369,24 @@ export default {
             if (this.personalDataForm.id !== null) {
                 Axios.post(`${BASE_URL}employe/company-data/${this.personalDataForm.id}`, this.personalDataForm)
                     .then(res => {
-                        console.log(res);
+                        // console.log(res);
+                        this.$store.state.Loader.loading = false
+                        this.$emit('savedCloseDialog')
                     })
                     .catch(err => {
                         console.log(err);
                     })
-                this.$store.state.Loader.loading = false
-                this.$emit('savedCloseDialog')
                 return
             }
 			Axios.post(`${BASE_URL}employe/company-data`, this.personalDataForm)
 				.then(res => {
 					console.log(res);
+                    this.$store.state.Loader.loading = false
+                    this.$emit('savedCloseDialog')
 				})
 				.catch(err => {
 					console.log(err);
 				})
-			this.$store.state.Loader.loading = false
-            this.$emit('savedCloseDialog')
             // console.log(this.personalDataForm);
         }
 

@@ -9,4 +9,26 @@ class PersonalData extends Model
 {
     use SoftDeletes;
     public $table = "personal_data";
+    public $fillable = [
+        'user_id',
+        'nome_completo',
+        'nuit',
+        'data_nascimento',
+        'genero',
+        'estado_civil',
+        'nacionalidade',
+        'tipo_documento',
+        'nr_documento',
+        'endereco',
+        'bairro',
+        'cod_postal',
+        'provincia',
+        'distrito',
+        'cidade',
+        'email',
+        'email_sec',
+        'contacto',
+        'contacto_sec',
+        'cell'
+    ];
 }

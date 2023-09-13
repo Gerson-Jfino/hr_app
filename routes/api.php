@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Employee;
-use App\PersonalData;
+use App\NivelAcademico;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,7 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/pelouros', 'profileController@getPelouros');
 Route::post('/employe/company-data', 'profileController@storeCompanyData');
 Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
+Route::post('/employe/personal-data', 'profileController@storePesonalData');
+Route::post('/employe/personal-data/{id}', 'profileController@updatePesonalData');
+Route::post('/employe/nivel-academico', 'profileController@storeNivelAcademicoData');
+Route::post('/employe/nivel-academico/{id}', 'profileController@updateNivelAcademicoData');
 Route::get('/me', 'profileController@meAdapter');
 Route::get('/testsecto', function () {
-    return PersonalData::get();
+    return NivelAcademico::get();
 });

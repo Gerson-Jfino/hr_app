@@ -40,4 +40,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(\App\Employee::class, 'user_id');
     }
+    public function personal_data()
+    {
+        return $this->hasOne(\App\PersonalData::class, 'user_id');
+    }
+    public function nivel_academico()
+    {
+        return $this->hasOne(\App\NivelAcademico::class, 'user_id');
+    }
 }

@@ -28,7 +28,7 @@
                       class="d-flex justify-center align-center pa-0"
                       cols="12"
                     >
-                      <div class="grey--text ms-1">001212</div>
+                      <div class="grey--text ms-1" v-if="personal_data?.id">cod: {{ personal_data.id }}</div>
                     </v-col>
                     <v-col
                       align-self="start"
@@ -37,10 +37,10 @@
                       style="margin-top: -20px"
                     >
                       <v-card-title
-                        ><strong> Gerson Maoze</strong></v-card-title
+                        ><strong> {{ personal_data?.nome_completo }}</strong></v-card-title
                       >
                     </v-col>
-                    <v-col
+                    <!-- <v-col
                       align-self="start"
                       class="d-flex justify-center align-center pa-0"
                       cols="12"
@@ -59,19 +59,19 @@
                       <div class="" style="font-size: small">
                         Pelouro de De destribuição Comercial e Informatica
                       </div>
-                    </v-col>
+                    </v-col> -->
                   </v-row>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
 
                 <v-card-text>
                   <v-row>
-                    <v-card-title> Dados Pessoais </v-card-title>
+                    <v-card-title class="orange--text"> Dados Pessoais </v-card-title>
                     <v-btn
-                      class="ma-4"
-                      outlined
-                      color="indigo"
-                      small
+                    class="ma-4"
+                    color="error"
+                    outlined
+                    small
                       @click="dialog = true"
                     >
                       <v-icon small>mdi-pencil</v-icon>
@@ -82,7 +82,7 @@
                       <v-toolbar color="secondary" dark>
                         <v-row> Ficha de Dados Pessoais </v-row>
                       </v-toolbar>
-                      <personl-data-dialog @closeDialog="closePesonalForm" />
+                      <personl-data-dialog :personalDataForm="personal_data" @closeDialog="closePesonalForm" @savedPersonalCloseDialog="savedPersonalCloseDialog"/>
                     </v-dialog>
                   </v-row>
 
@@ -111,12 +111,12 @@
                     </v-col>
                     <v-col cols="8">
                       <span class="grey--text ms-4" style="font-size: small"
-                        >12/01/1997</span
+                        >{{ personal_data?.data_nascimento | formatDate }}</span
                       ><br />
                       <span
                         class="grey--text ms-4"
                         style="font-size: small; margin-top: -20px"
-                        >27 Anos</span
+                        v-if="personal_data?.data_nascimento">{{ personal_data?.data_nascimento | getAge }} Anos</span
                       >
                     </v-col>
                   </v-row>
@@ -126,16 +126,16 @@
                     </v-col>
                     <v-col cols="8">
                       <span class="grey--text ms-4" style="font-size: small"
-                        >MOÇAMBICANO</span
+                        >{{ personal_data?.nacionalidade }}</span
                       ><br />
                       <span class="grey--text ms-4" style="font-size: small"
-                        >MASCULINO</span
+                        >{{ personal_data?.genero }}</span
                       ><br />
                       <span class="grey--text ms-4" style="font-size: small"
-                        >NUIT: 123456789</span
+                        v-if="personal_data?.nuit">NUIT: {{ personal_data?.nuit }}</span
                       ><br />
                       <span class="grey--text ms-4" style="font-size: small"
-                        >DOCUMENTO: 123455656</span
+                        v-if="personal_data?.nr_documento" >{{ personal_data?.tipo_documento }}: {{ personal_data?.nr_documento }}</span
                       ><br />
                     </v-col>
                   </v-row>
@@ -146,10 +146,10 @@
                     </v-col>
                     <v-col cols="8">
                       <span class="grey--text ms-4" style="font-size: small"
-                        >Cidade de Maputo</span
+                        v-if="personal_data?.cidade">Cidade de {{ personal_data?.cidade }}</span
                       ><br />
                       <span class="grey--text ms-4" style="font-size: small"
-                        >Endereço, Maputo Magoanine</span
+                        >{{ personal_data?.endereco }}, {{ personal_data?.provincia }} {{ personal_data?.bairro }}</span
                       ><br />
                     </v-col>
                   </v-row>
@@ -159,13 +159,13 @@
                     </v-col>
                     <v-col cols="8">
                       <span class="grey--text ms-4" style="font-size: small"
-                        >841212121</span
+                        >{{ personal_data?.contacto }}</span
                       ><br />
                       <span class="grey--text ms-4" style="font-size: small"
-                        >841212121</span
+                        v-if="personal_data?.contacto_sec">{{ personal_data?.contacto_sec }}</span
                       ><br />
                       <span class="grey--text ms-4" style="font-size: small"
-                        >841212121</span
+                        v-if="personal_data?.cell">{{ personal_data?.cell }}</span
                       ><br />
                     </v-col>
                   </v-row>
@@ -175,7 +175,10 @@
                     </v-col>
                     <v-col cols="8">
                       <span class="grey--text ms-4" style="font-size: small"
-                        >gersonjfmaoze@gmail.com</span
+                        >{{ personal_data?.email }}</span
+                      ><br />
+                      <span class="grey--text ms-4" style="font-size: small"
+                        >{{ personal_data?.email_sec }}</span
                       ><br />
                     </v-col>
                   </v-row>
@@ -186,15 +189,15 @@
             </v-sheet>
           </v-col>
 
-          <v-col>
-            <v-sheet min-height="70vh" rounded="lg">
+          <v-col style="margin-top: 15px;">
+            <v-sheet rounded="lg">
               <v-card>
                 <v-row>
-                  <v-card-title>Dados Empresariais </v-card-title>
+                  <v-card-title class="orange--text" style="margin-left: 5px;">Dados Empresariais </v-card-title>
                   <v-btn
                     class="ma-4"
+                    color="error"
                     outlined
-                    color="indigo"
                     small
                     @click="
                       () => {
@@ -262,6 +265,77 @@
                     </v-timeline>
                   </v-card-text>
                 </v-row>
+                <v-divider class="mx-4" style="margin-top: 30px;"></v-divider>
+                <v-row wrap style="margin-top: 10px; margin-left: 5px;">
+                    <!-- <v-row>
+
+                    </v-row> -->
+                    <!-- <br> -->
+                    <v-row wrap>
+                        <v-col cols="12">
+                            <v-row>
+                                <v-col cols="2">
+                                    <v-card-title class="orange--text" style="margin-left: 5px;">Educação </v-card-title>
+                                </v-col>
+                                <v-col cols="2">
+                                    <v-btn
+                                        class="ma-4"
+                                        color="error"
+                                        outlined
+                                        small
+                                        @click="
+                                        () => {
+                                            dialogEducation = true;
+                                        }
+                                        "
+                                    >
+                                        <v-icon small>mdi-pencil</v-icon>
+                                        Editar
+                                    </v-btn>
+                                    <v-dialog
+                                        v-model="dialogEducation"
+                                        persistent
+                                        max-width="900px"
+                                    >
+                                        <v-toolbar color="secondary" dark>
+                                        <v-row> Educação </v-row>
+                                        </v-toolbar>
+                                        <education-data-dialog :personal-data-form="nivel_academico" @closeDialogAcademic="closeAcademicDialog" @savedEducationlCloseDialog="savedEducationCloseDialog"
+                                        />
+                                    </v-dialog>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="12" style="margin-top: -25px;">
+                            <v-card-text>
+                                <v-timeline
+                                    align-top
+                                    dense
+                                    style="margin-left: -20px;"
+                                >
+                                    <v-timeline-item small color="grey">
+                                        <div class="blue--text"><strong><u> {{ nivel_academico?.curso }}</u></strong></div>
+                                        <div class="black--text" style="font-size: small">
+                                            &#x2022; <v-icon small>mdi-account-school</v-icon> {{ nivel_academico?.nivel?.name }}
+                                        </div>
+                                        <div class="grey--text">{{ nivel_academico?.instituicao }}</div>
+                                    </v-timeline-item>
+                                </v-timeline>
+                                <div class="grey--text" style="margin-left: 15px; margin-top: 5px;">
+                                    anexo
+                                </div>
+                                <div style="margin-left: 15px;" class="fileajjust" v-if="nivel_academico?.anexo">
+                                    <div>
+                                        <v-icon large>
+                                            mdi-file-document
+                                        </v-icon>
+                                    </div>
+                                    <div><a :href="nivel_academico?.anexo" target="_blank"> Baixar Anexo</a></div>
+                                </div>
+                            </v-card-text>
+                        </v-col>
+                    </v-row>
+                </v-row>
               </v-card>
             </v-sheet>
           </v-col>
@@ -276,12 +350,14 @@ import axios from 'axios'
 import { BASE_URL } from '../../config/api'
 import companyDataDialog from "./companyDataDialog.vue";
 import personlDataDialog from "./personlDataDialog.vue";
+import educationDataDialog from './educationDataDialog.vue';
 export default {
-  components: { personlDataDialog, companyDataDialog },
+  components: { personlDataDialog, companyDataDialog, educationDataDialog },
   data: () => ({
     links: ["Dashboard", "Messages", "Profile", "Updates"],
     dialog: false,
     dialogCompany: false,
+    dialogEducation: false,
     employee: {
         id: null,
         nome_completo: "",
@@ -295,7 +371,37 @@ export default {
         uni_org_id: null,
         sector_id: null,
         salario: ""
+    },
+    personal_data: {
+        id: null,
+        nome_completo: "",
+        nuit: "",
+        data_nascimento: null,
+        genero: "",
+        estado_civil: "",
+        nacionalidade: "",
+        tipo_documento: "",
+        nr_documento: "",
+        endereco: "",
+        bairro: "",
+        cod_postal: "",
+        provincia: "",
+        distrito: "",
+        cidade: "",
+        email: "",
+        email_sec: "",
+        contacto: "",
+        contacto_sec: "",
+        cell: ""
+    },
+    nivel_academico: {
+        id: null,
+        nivel_id: null,
+        curso: "",
+        instituicao: "",
+        anexo: null
     }
+
   }),
   created() {
     this.getMe()
@@ -307,18 +413,73 @@ export default {
     closeCompanyDialig() {
       this.dialogCompany = false;
     },
+    closeAcademicDialog() {
+        this.dialogEducation = false
+    },
+    savedEducationCloseDialog() {
+        this.dialogEducation = false
+        this.getMe()
+    },
     savedCompanyDialog() {
         this.dialogCompany = false;
+        this.getMe()
+    },
+    savedPersonalCloseDialog() {
+        this.dialog = false
         this.getMe()
     },
     async getMe() {
         this.$store.state.Loader.loading = true
         const me = (await axios.get(`${BASE_URL}me`)).data
-        this.employee = me.employee
+        if (me.employee) {
+            this.employee = me.employee
+        }
+        if (me.personal_data) {
+            this.personal_data = me.personal_data
+        }
+        if (me.nivel_academico) {
+            this.nivel_academico = me.nivel_academico
+        }
         // console.log(this.employee);
         this.$store.state.Loader.loading = false
     }
   },
+  filters: {
+    formatDate: (date) => {
+		if (date) {
+			let newDate = new Date(date);
+			let newFormatedDate =
+				newDate.getDate() +
+				"/" +
+				(newDate.getMonth() + 1) +
+				"/" +
+				newDate.getFullYear();
+			return newFormatedDate;
+		}
+		return "";
+	},
+    getAge(date) {
+        if (date) {
+            var today = new Date();
+            var birthDate = new Date(date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+        return "";
+    }
+  },
+
 };
 </script>
-
+<style scoped>
+.fileajjust {
+    margin: auto;
+    width: 120px;
+    border: 2px solid rgba(128, 128, 128, 0.452);
+    padding: 10px;
+}
+</style>
