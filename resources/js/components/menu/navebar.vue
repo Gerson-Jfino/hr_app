@@ -1,52 +1,103 @@
 <template>
-  <v-app-bar
-        app
-        color="white"
-        flat
-      >
-        <v-container class="py-0 fill-height">
-          <v-avatar
-            class="mr-10"
-            color="grey darken-1"
-            size="32"
-          >
-            <span>GM</span>
-          </v-avatar>
+	<v-card
 
-          <v-btn
-            v-for="link in links"
-            :key="link"
-            text
-          >
-            {{ link }}
-          </v-btn>
+		tile
+	>
+		<v-app-bar
+		>
+		<!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
 
-          <v-spacer></v-spacer>
+		Gugla
+		<v-spacer></v-spacer>
+		<v-toolbar-items>
+			<v-menu
+			offset-y
+			>
+				<template v-slot:activator="{ on, attrs }">
+					<v-btn v-bind="attrs" v-on="on" depressed rounded text small>
+						<div>
+							GM
+						</div>
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item>
+					<!-- <v-list-item @click.prevent="logout"> -->
+						<v-list-item-icon><v-icon>mdi-logout</v-icon></v-list-item-icon>
+						<v-list-item-title>Logout</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
 
-          <v-responsive max-width="260">
-            <v-text-field
-              dense
-              flat
-              hide-details
-              rounded
-              solo-inverted
-            ></v-text-field>
-          </v-responsive>
-        </v-container>
-      </v-app-bar>
+		</v-toolbar-items>
+		</v-app-bar>
+
+		<v-navigation-drawer
+		v-model="drawer"
+		fixed
+		clipped
+		app
+		enable-resize-watcher
+		height="100vh"
+        permanent
+		>
+		<!--temporary-->
+		<v-list
+			nav
+			dense
+		>
+			<v-list-item>
+
+			</v-list-item>
+			<v-list-item>
+
+			</v-list-item>
+			<v-list-item :to="{name: 'personal.data'}">
+                <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-clipboard-account </v-icon></v-list-item-icon>
+				<v-list-item-title style="color:rgb(255, 153, 0);">Minha Ficha</v-list-item-title>
+			</v-list-item>
+			<v-list-item :to="{name: 'personal.data'}">
+                <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-account-group </v-icon></v-list-item-icon>
+				<v-list-item-title style="color:rgb(255, 153, 0);">Colaboradores</v-list-item-title>
+			</v-list-item>
+			<v-list-item :to="{name: 'personal.data'}">
+                <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-chart-line </v-icon></v-list-item-icon>
+				<v-list-item-title style="color:rgb(255, 153, 0);">Relatórios</v-list-item-title>
+			</v-list-item>
+
+		</v-list>
+		</v-navigation-drawer>
+	</v-card>
 </template>
+
 
 <script>
 export default {
-      data: () => ({
-        links: [
-          'Dashboard',
-          'Messages',
-          'Profile',
-          'Updates',
-        ],
-      }),
-    }
+    data() {
+        return {
+			drawer: true,
+			group: null,
+        }
+    },
+	methods: {
+		logout() {
+			this.$store.dispatch('auth/logout')
+			.then(() => {
+				this.$router.push({name: 'admin.login'})
+			})
+			.catch(() => {
+				this.$router.push({name: 'admin.login'})
+			})
+		}
+	},
+	computed: {
+		user() {
+			const user = this.$store.state.auth.user
+
+			return user
+		}
+	}
+}
 </script>
 
 <style>

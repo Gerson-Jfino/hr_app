@@ -1,7 +1,9 @@
 <template>
-    <div  class="grey">
+    <div >
         <navebar/>
-        <main-details style="margin-top: 10px;"/>
+        <div class="mt-6">
+                <router-view></router-view>
+        </div>
         <loader/>
     </div>
   </template>

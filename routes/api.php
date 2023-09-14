@@ -14,30 +14,33 @@ use App\NivelAcademico;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:api')->get('/user', function () {
+    return "teste";
+});
 Route::group([
 
     'middleware' => 'api',
-    'prefix' => 'auth'
 
 ], function ($router) {
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::get('me', 'AuthController@me');
 
 });
-Route::get('/pelouros', 'profileController@getPelouros');
-Route::post('/employe/company-data', 'profileController@storeCompanyData');
-Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
-Route::post('/employe/personal-data', 'profileController@storePesonalData');
-Route::post('/employe/personal-data/{id}', 'profileController@updatePesonalData');
-Route::post('/employe/nivel-academico', 'profileController@storeNivelAcademicoData');
-Route::post('/employe/nivel-academico/{id}', 'profileController@updateNivelAcademicoData');
-Route::get('/me', 'profileController@meAdapter');
-Route::get('/testsecto', function () {
+Route::group([
+    'middleware' => 'auth:api'
+], function () {
+    Route::get('/pelouros', 'profileController@getPelouros');
+    Route::post('/employe/company-data', 'profileController@storeCompanyData');
+    Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
+    Route::post('/employe/personal-data', 'profileController@storePesonalData');
+    Route::post('/employe/personal-data/{id}', 'profileController@updatePesonalData');
+    Route::post('/employe/nivel-academico', 'profileController@storeNivelAcademicoData');
+    Route::post('/employe/nivel-academico/{id}', 'profileController@updateNivelAcademicoData');
+    Route::get('/testsecto', function () {
+    });
     return NivelAcademico::get();
 });
+Route::get('/getMe', 'profileController@meAdapter');

@@ -242,7 +242,7 @@
                           &#x2022; {{ employee?.sector?.name }}
                         </div>
                         <div class="font-weight-normal">
-                          <strong>Gerson Josefino Maoze</strong> &#x2022;
+                          <strong>{{ employee?.nome_completo }}</strong> &#x2022;
                           <span class="grey--text"> {{ employee?.categoria?.name }} </span>
                         </div>
                         <div><strong>{{ employee?.nivel?.name }}</strong></div>
@@ -429,19 +429,29 @@ export default {
         this.getMe()
     },
     async getMe() {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem('TOKEN_AUTH')}`,
+            }
+        }
         this.$store.state.Loader.loading = true
-        const me = (await axios.get(`${BASE_URL}me`)).data
-        if (me.employee) {
-            this.employee = me.employee
+        try {
+            const me = (await axios.get(`${BASE_URL}getMe`)).data
+            if (me.employee) {
+                this.employee = me.employee
+            }
+            if (me.personal_data) {
+                this.personal_data = me.personal_data
+            }
+            if (me.nivel_academico) {
+                this.nivel_academico = me.nivel_academico
+            }
+            // console.log(this.employee);
+            this.$store.state.Loader.loading = false
+        } catch (error) {
+            console.log(error);
+            this.$router.push({name: 'login'})
         }
-        if (me.personal_data) {
-            this.personal_data = me.personal_data
-        }
-        if (me.nivel_academico) {
-            this.nivel_academico = me.nivel_academico
-        }
-        // console.log(this.employee);
-        this.$store.state.Loader.loading = false
     }
   },
   filters: {

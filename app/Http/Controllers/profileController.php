@@ -45,7 +45,7 @@ class profileController extends Controller
     }
     public function storeCompanyData(Request $request) {
         $input = $request->all();
-        $input['user_id'] = 1;
+        $input['user_id'] = Auth::user()->id;
         DB::beginTransaction();
         try {
             $employee = $this->employee->create($input);
@@ -60,7 +60,7 @@ class profileController extends Controller
     }
     public function updateCompanyData($id, Request $request) {
         $input = $request->all();
-        $input['user_id'] = 1;
+        $input['user_id'] = Auth::user()->id;
         $employee = $this->employee->find($id)->first();
         DB::beginTransaction();
         try {
@@ -74,12 +74,13 @@ class profileController extends Controller
         }
     }
     public function meAdapter() {
+        // $id = Auth::user()->id;
         $user = User::where('id', 1)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
         return response()->json($user, 200);
     }
     public function storePesonalData(Request $request) {
         $input = $request->all();
-        $input['user_id'] = 1;
+        $input['user_id'] = Auth::user()->id;
         DB::beginTransaction();
         try {
             $personal_data = $this->personal_data->create($input);
@@ -93,7 +94,7 @@ class profileController extends Controller
     }
     public function updatePesonalData($id, Request $request) {
         $input = $request->all();
-        $input['user_id'] = 1;
+        $input['user_id'] = Auth::user()->id;
         $personal_data = $this->personal_data->find($id)->first();
         DB::beginTransaction();
         try {
@@ -108,7 +109,7 @@ class profileController extends Controller
     }
     public function storeNivelAcademicoData(Request $request) {
         $input = $request->only(['nivel_id', 'curso', 'instituicao']);
-        $input['user_id'] = 1;
+        $input['user_id'] = Auth::user()->id;
         DB::beginTransaction();
         try {
             if ($request->anexo) {
@@ -128,7 +129,7 @@ class profileController extends Controller
     }
     public function updateNivelAcademicoData($id, Request $request) {
         $input = $request->only(['nivel_id', 'curso', 'instituicao']);
-        $input['user_id'] = 1;
+        $input['user_id'] = Auth::user()->id;
         $nivel_academico = $this->nivel_academico->find($id)->first();
         DB::beginTransaction();
         try {
