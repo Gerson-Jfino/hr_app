@@ -2,10 +2,10 @@
   <v-app id="inspire">
     <v-main class="grey lighten-3">
       <v-container>
-        <v-row>
-          <v-col cols="3">
-            <v-sheet rounded="lg">
-              <v-card>
+        <v-row >
+          <v-col cols="4" class="me-4">
+            <!-- <v-sheet rounded="lg"> -->
+              <v-card max-width="450px">
                 <v-divider></v-divider>
                 <v-card-title>
                   <v-row align="center">
@@ -186,7 +186,7 @@
 
                 <v-divider class="mx-4"></v-divider>
               </v-card>
-            </v-sheet>
+            <!-- </v-sheet> -->
           </v-col>
 
           <v-col style="margin-top: 15px;">
@@ -251,11 +251,11 @@
                             class="font-weight-normal"
                             style="font-size: small"
                           >
-                            <strong>Data inicio</strong> &#x2022; {{ employee.data_admissao }} -
-                            <strong>Data inicio</strong> &#x2022; {{ employee.data_fim }}
+                            <strong>Data inicio</strong> &#x2022; {{ employee.data_admissao | formatDate }} -
+                            <strong>Data inicio</strong> &#x2022; {{ employee.data_fim | formatDate }}
                           </div>
                           <div>
-                            <strong>{{ employee?.situation?.name }}</strong> &#x2022; {{ employee.data_situacao }}
+                            <strong>{{ employee?.situation?.name }}</strong> &#x2022; {{ employee.data_situacao | formatDate }}
                           </div>
                           <div>
                             <strong>SALARIO: </strong> {{ employee.salario }}
