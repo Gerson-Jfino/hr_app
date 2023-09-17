@@ -1,10 +1,12 @@
 <template>
     <div >
-        <navebar/>
-        <div class="mt-6">
-                <router-view></router-view>
-        </div>
-        <loader/>
+            <navebar/>
+            <div class="mt-6">
+                <v-app>
+                    <router-view></router-view>
+                </v-app>
+                </div>
+            <loader/>
     </div>
   </template>
 

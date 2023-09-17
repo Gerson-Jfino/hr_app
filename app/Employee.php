@@ -47,4 +47,26 @@ class Employee extends Model
     {
         return $this->belongsTo(\App\Nivel::class, 'nivel_id');
     }
+    public function scopefilterEmploye($query, $filters, $recruiter_id = null)
+    {
+        $name = $filters['name'];
+        $situation = $filters['situation'];
+        $pelouro = $filters['pelouro'];
+        $uni_org = $filters['uni_org'];
+
+        if (!empty($name)) {
+            return $query->where('nome_completo', 'LIKE', "%$name%");
+
+        } elseif (!empty($situation)) {
+            return $query->where('situation_id', $situation);
+        }
+        elseif (!empty($pelouro)) {
+            return $query->where('pelouro_id', $pelouro);
+        }
+        elseif (!empty($uni_org)) {
+            return $query->where('uni_org_id', $uni_org);
+        } else {
+            return $query;
+        }
+    }
 }

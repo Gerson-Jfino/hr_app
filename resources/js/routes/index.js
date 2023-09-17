@@ -4,7 +4,9 @@ import Vuex from "vuex";
 import store from '../vuex/store'
 import Main from "../components/Main.vue"
 import mainDetails from "../components/layout/mainDetails.vue"
+import colaboradores from "../components/layout/colaboradores.vue"
 import Login from "../components/layout/auth/login.vue"
+import colaboradorDetalhes from "../components/layout/colaboradorDetails.vue"
 
 
 Vue.use(VueRouter)
@@ -12,20 +14,31 @@ Vue.use(VueRouter)
 const routes = [
 
     {
-        path: '/login',
+        path: '/',
         component: Login,
         name: 'login'
     },
     {
-        path: '/',
+        path: '/minha-ficha',
         component: Main,
         // meta: {auth: true},
         children: [
             {
-                path: '/',
+                path: '/minha-ficha',
                 component: mainDetails,
                 name: 'personal.data'
-            }
+            },
+            {
+                path: '/colaboradores',
+                component: colaboradores,
+                name: 'colaboradores.data'
+            },
+            {
+                path: '/colaboradores/:id/detalhes',
+                component: colaboradorDetalhes,
+                name: 'colaborador.details',
+                props: true
+            },
         ]
     }
 ]
