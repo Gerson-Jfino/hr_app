@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://new-hr-app/api/'
+export const BASE_URL = 'http://hr-app/api/'
