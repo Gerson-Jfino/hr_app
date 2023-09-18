@@ -17,13 +17,13 @@
 				<template v-slot:activator="{ on, attrs }">
 					<v-btn v-bind="attrs" v-on="on" depressed rounded text small>
 						<div>
-							Gerson Maoze
+							{{ user?.name }}
 						</div>
 					</v-btn>
 				</template>
 				<v-list>
-					<v-list-item>
-					<!-- <v-list-item @click.prevent="logout"> -->
+					<!-- <v-list-item> -->
+					<v-list-item @click.prevent="logout">
 						<v-list-item-icon><v-icon>mdi-logout</v-icon></v-list-item-icon>
 						<v-list-item-title>Logout</v-list-item-title>
 					</v-list-item>
@@ -82,19 +82,23 @@ export default {
     },
 	methods: {
 		logout() {
-			this.$store.dispatch('auth/logout')
+			this.$store.dispatch('Auth/logout')
 			.then(() => {
-				this.$router.push({name: 'admin.login'})
+				this.$router.push({name: 'login'})
 			})
 			.catch(() => {
-				this.$router.push({name: 'admin.login'})
+				this.$router.push({name: 'login'})
 			})
 		}
 	},
+	created() {
+		// setTimeout(()=> {
+		// 	console.log(this.user);
+		// }, 1000)
+	},
 	computed: {
 		user() {
-			const user = this.$store.state.auth.user
-
+			const user = this.$store.state.Auth.user
 			return user
 		}
 	}

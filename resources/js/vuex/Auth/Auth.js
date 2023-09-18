@@ -6,6 +6,7 @@ export default {
 
     state: {
         user: {
+            name: 'lol'
         },
         authenticated: false,
         urlBack: 'site.welcome',
@@ -73,7 +74,7 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.get(`${BASE_URL}me`, config)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     // const token = sessionStorage.getItem('TOKEN_AUTH')
                     //console.log(token)
                     const payload = {
@@ -94,7 +95,7 @@ export default {
         autoRegisto({commit}, params) {
             commit('Loader/CHANGE_LOADING', true, { root: true })
             return new Promise((resolve, reject) => {
-                axios.post(`${URL_BASE}/users/register`, params)
+                axios.post(`${BASE_URL}/users/register`, params)
                     .then(res => {
                         resolve(res)
                         sessionStorage.removeItem('token')
@@ -108,7 +109,9 @@ export default {
         logout({commit}) {
             commit('Loader/CHANGE_LOADING', true, { root: true })
             return new Promise((resolve, reject) => {
-                axios.get(`${URL_BASE}/users/logout`)
+                
+				console.log('out');
+                axios.post(`${BASE_URL}logout`, {})
                     .then(res => {
                         resolve(res)
                         commit('AUTH_USER_LOGOUT', res)

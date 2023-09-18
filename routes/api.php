@@ -29,9 +29,9 @@ Route::group([
     Route::get('me', 'AuthController@me');
 
 });
-// Route::group([
-//     'middleware' => 'auth:api'
-// ], function () {
+Route::group([
+    'middleware' => 'auth:api'
+], function () {
     Route::get('/pelouros', 'profileController@getPelouros');
     Route::post('/employe/company-data', 'profileController@storeCompanyData');
     Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
@@ -41,8 +41,8 @@ Route::group([
     Route::post('/employe/nivel-academico/{id}', 'profileController@updateNivelAcademicoData');
     Route::get('/testsecto', function () {
     });
+    Route::get('/getMe', 'profileController@meAdapter');
+    Route::get('/get-colaboradores', 'adminController@getColaboradores');
+    Route::get('/colaborador/{id}', 'adminController@showColaborador');
     // return NivelAcademico::get();
-// });
-Route::get('/getMe', 'profileController@meAdapter');
-Route::get('/get-colaboradores', 'adminController@getColaboradores');
-Route::get('/colaborador/{id}', 'adminController@showColaborador');
+});

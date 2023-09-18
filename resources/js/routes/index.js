@@ -21,7 +21,7 @@ const routes = [
     {
         path: '/minha-ficha',
         component: Main,
-        // meta: {auth: true},
+        meta: {auth: true},
         children: [
             {
                 path: '/minha-ficha',
@@ -46,16 +46,16 @@ const router = new VueRouter({
     mode: 'history',
     routes
 })
-// router.beforeEach((to, from, next) => {
-// 	const userAuthenticated = store.state.Auth.authenticated
-//     if(to.matched.some(record => record.meta.auth)) {
-//       if (userAuthenticated) {
-//         next()
-//         return
-//       }
-//       next('/login')
-//     } else {
-//       next()
-//     }
-// })
+router.beforeEach((to, from, next) => {
+	const userAuthenticated = store.state.Auth.authenticated
+    if(to.matched.some(record => record.meta.auth)) {
+      if (userAuthenticated) {
+        next()
+        return
+      }
+      next('/')
+    } else {
+      next()
+    }
+})
 export default router

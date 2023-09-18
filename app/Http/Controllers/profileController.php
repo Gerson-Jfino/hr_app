@@ -15,6 +15,7 @@ use App\PersonalData;
 use App\NivelAcademico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class profileController extends Controller
@@ -74,8 +75,8 @@ class profileController extends Controller
         }
     }
     public function meAdapter() {
-        // $id = Auth::user()->id;
-        $user = User::where('id', 1)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
         return response()->json($user, 200);
     }
     public function storePesonalData(Request $request) {
