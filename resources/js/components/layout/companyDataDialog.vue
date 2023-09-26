@@ -507,6 +507,12 @@ export default {
                     .then(res => {
                         // console.log(res);
                         this.$store.state.Loader.loading = false
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Dados atualziada com sucesso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         this.$emit('savedCloseDialog')
                     })
                     .catch(err => {
@@ -517,6 +523,12 @@ export default {
 			Axios.post(`${BASE_URL}employe/company-data`, this.personalDataForm)
 				.then(res => {
 					console.log(res);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Dados guardada com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     this.$store.state.Loader.loading = false
                     this.$emit('savedCloseDialog')
 				})

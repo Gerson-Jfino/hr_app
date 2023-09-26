@@ -200,6 +200,12 @@ export default {
                     .then(res => {
                         // console.log(res);
                         this.$store.state.Loader.loading = false
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Dados atualizada com sucesso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         this.$emit('savedEducationlCloseDialog')
                     })
                     .catch(err => {
@@ -212,6 +218,12 @@ export default {
 				.then(res => {
 					// console.log(res);
                     this.$store.state.Loader.loading = false
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Dados guardada com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     this.$emit('savedEducationlCloseDialog')
 				})
 				.catch(err => {

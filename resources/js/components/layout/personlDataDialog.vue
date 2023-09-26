@@ -505,6 +505,12 @@ export default {
                     .then(res => {
                         // console.log(res);
                         this.$store.state.Loader.loading = false
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Dados atualizados com sucesso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         this.$emit('savedPersonalCloseDialog')
                     })
                     .catch(err => {
@@ -517,6 +523,12 @@ export default {
 				.then(res => {
 					// console.log(res);
                     this.$store.state.Loader.loading = false
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Dados guardados com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     this.$emit('savedPersonalCloseDialog')
 				})
 				.catch(err => {
