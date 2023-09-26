@@ -20,7 +20,7 @@
                         color="grey"
                         size="60"
                       >
-                        <span style="color: aliceblue">GM</span>
+                        <span style="color: aliceblue">{{ initialsNameUser }}</span>
                       </v-avatar>
                     </v-col>
                     <v-col
@@ -358,6 +358,7 @@ export default {
     dialog: false,
     dialogCompany: false,
     dialogEducation: false,
+    initialsNameUser: "",
     employee: {
         id: null,
         nome_completo: "",
@@ -403,6 +404,14 @@ export default {
     }
 
   }),
+	computed: {
+		user() {
+			const user = this.$store.state.Auth.user
+      this.initialsNameUser = user.name.split(' ')[0].charAt(0) + user.name.split(' ')[user.name.split(' ').length - 1].charAt(0)
+      // console.log(user.name.split(' ')[0].charAt(0) + user.name.split(' ')[user.name.split(' ').length - 1].charAt(0));
+			return user
+		}
+	},
   created() {
     this.getMe()
   },
@@ -452,6 +461,11 @@ export default {
             console.log(error);
             this.$router.push({name: 'login'})
         }
+    }
+  },
+  watch: {
+    user(user) {
+      console.log(user);
     }
   },
   filters: {

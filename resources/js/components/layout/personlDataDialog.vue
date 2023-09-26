@@ -487,7 +487,7 @@ export default {
             this.$emit('closeDialog')
         },
         async save() {
-            const isValidAutoRegisterForm = await this.$refs.educationForm.validate();
+            const isValidAutoRegisterForm = await this.$refs.personalDataForm.validate();
             if(!isValidAutoRegisterForm) {
                 Swal.fire({
 					title: "Alerta de Validação!",
