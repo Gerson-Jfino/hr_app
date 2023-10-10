@@ -22,7 +22,7 @@
                                 >
 
                                 </v-text-field>
-                                <span>Ainda não tem conta? <span class="register" @click="register"> Registe-se.</span></span>
+                                <span>Ainda não tem conta? <span class="register" @click="register" style="color: red; cursor: pointer;"> Registe-se.</span></span>
                             </v-card-text>
                             <v-card-actions>
                                 <v-btn
@@ -49,13 +49,16 @@
                 </v-container>
             </v-card>
         </v-row>
+        <loader/>
     </v-container>
 </v-app>
 </template>
 
 <script>
+import Loader from '../../loader/Loader.vue';
 import Swal from "sweetalert2";
 export default {
+    components: {Loader},
     data() {
         return {
             formData: {

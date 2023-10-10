@@ -36,6 +36,7 @@ class CreateEmployeTable extends Migration
                 $table->unsignedInteger('nivel_id');
                 $table->foreign('nivel_id')->references('id')->on('nivel');
                 $table->bigInteger('salario');
+                $table->string('inss');
                 $table->timestamps();
                 $table->softDeletes();
             });

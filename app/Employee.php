@@ -22,6 +22,7 @@ class Employee extends Model
         'categoria_id',
         'nivel_id',
         'salario',
+        'inss'
     ];
     public function situation()
     {

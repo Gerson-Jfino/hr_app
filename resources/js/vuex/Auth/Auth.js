@@ -45,6 +45,7 @@ export default {
                             user: {
                                 id: user.id,
                                 name: user.name,
+                                role_id: user.role_id,
                                 email: user.email
                             }
                         }
@@ -95,7 +96,7 @@ export default {
         autoRegisto({commit}, params) {
             commit('Loader/CHANGE_LOADING', true, { root: true })
             return new Promise((resolve, reject) => {
-                axios.post(`${BASE_URL}/users/register`, params)
+                axios.post(`${BASE_URL}register`, params)
                     .then(res => {
                         resolve(res)
                         sessionStorage.removeItem('token')

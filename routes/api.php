@@ -24,6 +24,7 @@ Route::group([
 ], function ($router) {
 
     Route::post('login', 'AuthController@login');
+    Route::post('register', 'UserController@autoRegister');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
@@ -44,5 +45,9 @@ Route::group([
     Route::get('/getMe', 'profileController@meAdapter');
     Route::get('/get-colaboradores', 'adminController@getColaboradores');
     Route::get('/colaborador/{id}', 'adminController@showColaborador');
+    Route::get('/get-asseduidades', 'adminController@getAsseduidades');
+    Route::post('/save-asseduidades', 'adminController@storeAssiduidade');
+    Route::match(['put', 'post'], '/update-asseduidades/{id}', 'adminController@updateAssiduidade');
+    Route::get('/get-colaboradores-list', 'adminController@getEmployes');
     // return NivelAcademico::get();
 });
