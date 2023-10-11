@@ -26,6 +26,7 @@ class CreatePersonalDataTable extends Migration
                 $table->string('nacionalidade');
                 $table->string('tipo_documento');
                 $table->string('nr_documento');
+                $table->string('anexo_documento');
                 $table->string('endereco');
                 $table->string('bairro');
                 $table->string('cod_postal')->nullable();

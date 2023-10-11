@@ -309,6 +309,13 @@
                                     </v-select>
                                 </validation-provider>
                             </v-col>
+                            <v-col cols="12" md="5">
+                                <v-file-input
+                                label="Anexar curriculum"
+                                outlined
+                                dense
+                                v-model="documento"></v-file-input>
+                            </v-col>
 
                         </v-row>
 
@@ -399,7 +406,8 @@ export default {
                     uni_org_id: null,
                     sector_id: null,
                     salario: "",
-                    inss: ""
+                    inss: "",
+                    contrato: ""
                 }
             }
         }
@@ -439,6 +447,7 @@ export default {
             menu2: false,
             menu3: false,
             date: new Date().toISOString().substr(0, 10),
+            documento: null
 
         }
     },
@@ -502,8 +511,11 @@ export default {
 			this.personalDataForm.pelouro_id = this.pelouro_id
 			this.personalDataForm.uni_org_id = this.uni_org_id
 			this.personalDataForm.sector_id = this.sector_id
+            const formData = new FormData();
+            Object.keys(this.personalDataForm).forEach(key => formData.append(key, this.personalDataForm[key]))
+            formData.append("documeto", this.documento);
             if (this.personalDataForm.id !== null) {
-                Axios.post(`${BASE_URL}employe/company-data/${this.personalDataForm.id}`, this.personalDataForm)
+                Axios.post(`${BASE_URL}employe/company-data/${this.personalDataForm.id}`, formData)
                     .then(res => {
                         // console.log(res);
                         this.$store.state.Loader.loading = false
@@ -520,7 +532,7 @@ export default {
                     })
                 return
             }
-			Axios.post(`${BASE_URL}employe/company-data`, this.personalDataForm)
+			Axios.post(`${BASE_URL}employe/company-data`, formData)
 				.then(res => {
 					console.log(res);
                     Swal.fire({

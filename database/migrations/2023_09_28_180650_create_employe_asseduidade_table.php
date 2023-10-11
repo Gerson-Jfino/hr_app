@@ -24,6 +24,7 @@ class CreateEmployeAsseduidadeTable extends Migration
                 $table->string('absentismo');
                 $table->text('observacoes');
                 $table->text('anexo');
+                $table->string('contrato');
                 $table->timestamps();
                 $table->softDeletes();
             });

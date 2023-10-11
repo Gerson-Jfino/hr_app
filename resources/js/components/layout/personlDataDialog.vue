@@ -13,7 +13,7 @@
                         <v-col
                             cols="12"
                             sm="6"
-                            md="7"
+                            md="6"
                         >
                             <validation-provider
                                 v-slot="{ errors }"
@@ -29,30 +29,7 @@
                                 ></v-text-field>
                             </validation-provider>
                         </v-col>
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="5"
-                        >
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="Nuit"
-                                rules="required"
-                            >
-                                <v-text-field
-                                label="Nuit"
-                                outlined
-                                dense
-                                required
-                                v-model="personalDataForm.nuit"
-                                :error-messages="errors"
-                                ></v-text-field>
-                            </validation-provider>
-                        </v-col>
-
-                        </v-row>
-                        <v-row>
-                            <v-col cols="12" md="4">
+                        <v-col cols="12" md="3">
                                 <v-menu
                                         ref="menu"
                                         v-model="menu"
@@ -97,6 +74,30 @@
                                         </v-date-picker>
                                     </v-menu>
                             </v-col>
+                            <v-col
+                            cols="12"
+                            sm="4"
+                            md="3"
+                        >
+                            <validation-provider
+                                v-slot="{ errors }"
+                                name="Nuit"
+                                rules="required"
+                            >
+                                <v-text-field
+                                label="Nuit"
+                                outlined
+                                dense
+                                required
+                                v-model="personalDataForm.nuit"
+                                :error-messages="errors"
+                                ></v-text-field>
+                            </validation-provider>
+                        </v-col>
+
+                        </v-row>
+                        <v-row>
+                            
                             <v-col cols="12" md="4">
                                 <validation-provider
                                     v-slot="{ errors }"
@@ -129,8 +130,6 @@
                                 </v-select>
                             </validation-provider>
                         </v-col>
-                        </v-row>
-                        <v-row>
                         <v-col
                             cols="12"
                             md="4"
@@ -149,7 +148,10 @@
                                 :error-messages="errors"
                                 ></v-text-field>
                             </validation-provider>
-                        </v-col>
+                        </v-col>    
+                        </v-row>
+                        <v-row>
+                        
                         <v-col
                             cols="12"
                             md="4"
@@ -188,7 +190,13 @@
                                 ></v-text-field>
                             </validation-provider>
                         </v-col>
-
+                        <v-col cols="12" md="4">
+                            <v-file-input
+                            label="Anexar documento"
+                            outlined
+                            dense
+                            v-model="documento"></v-file-input>
+                        </v-col>
                         </v-row>
                         <v-divider class="mx-4"></v-divider>
                         <br>
@@ -447,6 +455,7 @@ export default {
                     nacionalidade: "",
                     tipo_documento: "",
                     nr_documento: "",
+                    anexo_documento: "",
                     endereco: "",
                     bairro: "",
                     cod_postal: "",
@@ -478,6 +487,7 @@ export default {
                 "Divorciado(A)",
                 "Viúvo(A)",
             ],
+            documento: null,
             date: new Date().toISOString().substr(0, 10),
             menu: false
         }
@@ -500,8 +510,13 @@ export default {
 				return;
             }
             this.$store.state.Loader.loading = true
+            const formData = new FormData();
+            Object.keys(this.personalDataForm).forEach(key => formData.append(key, this.personalDataForm[key]))
+            // console.log(formData.get('nome_completo'));
+            // return
+            formData.append("documeto", this.documento);
             if (this.personalDataForm.id !== null) {
-                Axios.post(`${BASE_URL}employe/personal-data/${this.personalDataForm.id}`, this.personalDataForm)
+                Axios.post(`${BASE_URL}employe/personal-data/${this.personalDataForm.id}`, formData)
                     .then(res => {
                         // console.log(res);
                         this.$store.state.Loader.loading = false
@@ -519,7 +534,7 @@ export default {
                 return
             }
             // console.log(this.personalDataForm);
-            Axios.post(`${BASE_URL}employe/personal-data`, this.personalDataForm)
+            Axios.post(`${BASE_URL}employe/personal-data`, formData)
 				.then(res => {
 					// console.log(res);
                     this.$store.state.Loader.loading = false

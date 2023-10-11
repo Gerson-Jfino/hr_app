@@ -49,6 +49,14 @@ class profileController extends Controller
         $input['user_id'] = Auth::user()->id;
         DB::beginTransaction();
         try {
+            if ($request->documeto) {
+                $path = 'uploads';
+                $document = time().'.' . $request->documeto->getClientOriginalExtension();
+                $request->documeto->move(public_path($path), $document);
+                $input['contrato'] = $path . '/' . $document;
+            } else {
+                $input['contrato'] = null;
+            }
             $employee = $this->employee->create($input);
             // $employee->user_id = 1;
             $employee->save();
@@ -65,6 +73,14 @@ class profileController extends Controller
         $employee = $this->employee->find($id)->first();
         DB::beginTransaction();
         try {
+            if ($request->documeto) {
+                $path = 'uploads';
+                $document = time().'.' . $request->documeto->getClientOriginalExtension();
+                $request->documeto->move(public_path($path), $document);
+                $input['contrato'] = $path . '/' . $document;
+            } else {
+                $input['contrato'] = null;
+            }
             $employee->update($input);
             $employee->save();
             DB::commit();
@@ -84,6 +100,14 @@ class profileController extends Controller
         $input['user_id'] = Auth::user()->id;
         DB::beginTransaction();
         try {
+            if ($request->documeto) {
+                $path = 'uploads';
+                $document = time().'.' . $request->documeto->getClientOriginalExtension();
+                $request->documeto->move(public_path($path), $document);
+                $input['anexo_documento'] = $path . '/' . $document;
+            } else {
+                $input['anexo_documento'] = null;
+            }
             $personal_data = $this->personal_data->create($input);
             $personal_data->save();
             DB::commit();
@@ -99,6 +123,14 @@ class profileController extends Controller
         $personal_data = $this->personal_data->find($id)->first();
         DB::beginTransaction();
         try {
+            if ($request->documeto) {
+                $path = 'uploads';
+                $document = time().'.' . $request->documeto->getClientOriginalExtension();
+                $request->documeto->move(public_path($path), $document);
+                $input['anexo_documento'] = $path . '/' . $document;
+            } else {
+                $input['anexo_documento'] = null;
+            }
             $personal_data->update($input);
             $personal_data->save();
             DB::commit();

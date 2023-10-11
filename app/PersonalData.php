@@ -18,6 +18,7 @@ class PersonalData extends Model
         'estado_civil',
         'nacionalidade',
         'tipo_documento',
+        'anexo_documento',
         'nr_documento',
         'endereco',
         'bairro',
@@ -31,4 +32,8 @@ class PersonalData extends Model
         'contacto_sec',
         'cell'
     ];
+    public function getAnexoDocumentoAttribute()
+    {
+        return $this->attributes['anexo_documento'] ?  env('APP_URL') . '/' . $this->attributes['anexo_documento'] : '';
+    }
 }

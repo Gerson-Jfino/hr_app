@@ -137,6 +137,7 @@
                       <span class="grey--text ms-4" style="font-size: small"
                         v-if="personal_data?.nr_documento" >{{ personal_data?.tipo_documento }}: {{ personal_data?.nr_documento }}</span
                       ><br />
+                      <span class="grey--text ms-4" style="font-size: small"><a :href="personal_data?.anexo_documento">Ver Documento</a></span>
                     </v-col>
                   </v-row>
 
@@ -260,6 +261,12 @@
                           <div>
                             <strong>SALARIO: </strong> {{ employee.salario }}
                           </div>
+                          <div>
+                            <strong>INSS: </strong> {{ employee.inss }}
+                          </div>
+                          <div>
+                            <span class="grey--text" style="font-size: small"><a :href="employee.contrato" target="__blank">Ver contrato</a></span>
+                          </div>
                         </div>
                       </v-timeline-item>
                     </v-timeline>
@@ -371,7 +378,9 @@ export default {
         pelouro_id: null,
         uni_org_id: null,
         sector_id: null,
-        salario: ""
+        inss: "",
+        salario: "",
+        contrato: ""
     },
     personal_data: {
         id: null,
@@ -383,6 +392,7 @@ export default {
         nacionalidade: "",
         tipo_documento: "",
         nr_documento: "",
+        anexo_documento: "",
         endereco: "",
         bairro: "",
         cod_postal: "",
