@@ -192,7 +192,7 @@ export default {
             formData.append('nivel_id', this.personalDataForm.nivel_id)
             formData.append('curso', this.personalDataForm.curso)
             formData.append('instituicao', this.personalDataForm.instituicao)
-            if (this.anexoAtach !== null) {
+            if (this.anexoAtach !== null && typeof(this.anexoAtach) !== 'string' ) {
                 formData.append('anexo', this.anexoAtach)
             }
             if (this.personalDataForm.id !== null) {

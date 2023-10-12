@@ -49,6 +49,14 @@ class Employee extends Model
     {
         return $this->belongsTo(\App\Nivel::class, 'nivel_id');
     }
+    public function desempenho()
+    {
+        return $this->hasMany(Desempenho::class, 'employe_id', 'id');
+    }
+    public function documento()
+    {
+        return $this->hasMany(Documento::class, 'employe_id', 'id');
+    }
     public function scopefilterEmploye($query, $filters, $recruiter_id = null)
     {
         $name = $filters['name'];

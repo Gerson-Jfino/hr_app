@@ -264,9 +264,93 @@
                           <div>
                             <strong>INSS: </strong> {{ employee.inss }}
                           </div>
-                          <div>
+                          <div v-if="employee.contrato">
                             <span class="grey--text" style="font-size: small"><a :href="employee.contrato" target="__blank">Ver contrato</a></span>
                           </div>
+                          <div v-if="empDocs.length > 0">
+                            <strong>Outros documentos: </strong> <span v-for="doc in empDocs" :key="doc.id"><a :href="doc.anexo" target="_blank">{{ doc.name }}</a></span>
+                          </div>
+                          <div v-if="employee.id" style="margin-top: 20px;">
+                            
+                            <v-row>
+                              <v-dialog
+                                v-model="dialogPersonalDocs"
+                                persistent
+                                max-width="600px"
+                              >
+                                <template v-slot:activator="{ on, attrs }">
+                                  <v-btn
+                                    color="primary"
+                                    dark
+                                    small
+                                    outlined
+                                    v-bind="attrs"
+                                    v-on="on"
+                                  >
+                                        <v-icon left>
+                                      mdi-plus
+                                    </v-icon>
+                                    documento
+                                  </v-btn>
+                                </template>
+                                <v-card>
+                                  <v-card-title>
+                                    <span class="text-h5">Anexar outros documentos</span>
+                                  </v-card-title>
+                                  <v-card-text>
+                                    <v-container>
+                                      <v-row>
+                                        <v-col
+                                          cols="12"
+                                          md="6"
+                                        >
+                                          <v-select
+                                            label="Tipo de documento"
+                                            :items="['Bilhete de Identidade', 'Carta de Condução', 'Nuit', 'Outro']"
+                                            v-model="newDocPersonal.name"
+                                            required
+                                          ></v-select>
+                                        </v-col>
+                                        <v-col
+                                          cols="12"
+                                          md="6"
+                                        >
+                                        <v-col
+                                            cols="12"
+                                        >
+                                        <!-- v-model="editedItem.protein" -->
+                                          <v-file-input
+                                          label="Anexar o documento"
+                                          outlined
+                                          dense
+                                          v-model="newDocPersonal.anexo"></v-file-input>
+                                        </v-col>
+                                        </v-col>
+                                      </v-row>
+                                    </v-container>
+                                  </v-card-text>
+                                  <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                      color="blue darken-1"
+                                      text
+                                      @click="dialogPersonalDocs = false"
+                                    >
+                                      Cancelar
+                                    </v-btn>
+                                    <v-btn
+                                      color="blue darken-1"
+                                      text
+                                      @click="SaveDocEmployee()"
+                                    >
+                                      Adicionar
+                                    </v-btn>
+                                  </v-card-actions>
+                                </v-card>
+                              </v-dialog>
+                            </v-row>
+                          </div>
+
                         </div>
                       </v-timeline-item>
                     </v-timeline>
@@ -326,6 +410,9 @@
                                             &#x2022; <v-icon small>mdi-account-school</v-icon> {{ nivel_academico?.nivel?.name }}
                                         </div>
                                         <div class="grey--text">{{ nivel_academico?.instituicao }}</div>
+                                        <div v-if="eduDocs.length > 0">
+                                          <strong>Certificações: </strong> <span v-for="doc in eduDocs" :key="doc.id"><a :href="doc.anexo" target="_blank">{{ doc.name }}</a></span>
+                                        </div>
                                     </v-timeline-item>
                                 </v-timeline>
                                 <div class="grey--text" style="margin-left: 15px; margin-top: 5px;">
@@ -338,6 +425,85 @@
                                         </v-icon>
                                     </div>
                                     <div><a :href="nivel_academico?.anexo" target="_blank"> Baixar Anexo</a></div>
+                                </div>
+                                <div v-if="employee.id" style="margin-top: 20px;">
+                            
+                                  <v-row>
+                                    <v-dialog
+                                      v-model="dialogEducationDocs"
+                                      persistent
+                                      max-width="600px"
+                                    >
+                                      <template v-slot:activator="{ on, attrs }">
+                                        <v-btn
+                                          color="primary"
+                                          dark
+                                          small
+                                          outlined
+                                          v-bind="attrs"
+                                          v-on="on"
+                                        >
+                                              <v-icon left>
+                                            mdi-plus
+                                          </v-icon>
+                                          certificaçãoes
+                                        </v-btn>
+                                      </template>
+                                      <v-card>
+                                        <v-card-title>
+                                          <span class="text-h5">Anexar outras certificações</span>
+                                        </v-card-title>
+                                        <v-card-text>
+                                          <v-container>
+                                            <v-row>
+                                              <v-col
+                                                cols="12"
+                                                md="6"
+                                              >
+                                                <v-text-field
+                                                  label="Nome da certificação"
+                                                  v-model="newDocEduc.name"
+                                                  required
+                                                ></v-text-field>
+                                              </v-col>
+                                              <v-col
+                                                cols="12"
+                                                md="6"
+                                              >
+                                              <v-col
+                                                  cols="12"
+                                              >
+                                              <!-- v-model="editedItem.protein" -->
+                                                <v-file-input
+                                                label="Anexar o documento"
+                                                outlined
+                                                dense
+                                                v-model="newDocEduc.anexo"></v-file-input>
+                                              </v-col>
+                                              </v-col>
+                                            </v-row>
+                                          </v-container>
+                                        </v-card-text>
+                                        <v-card-actions>
+                                          <v-spacer></v-spacer>
+                                          <v-btn
+                                            color="blue darken-1"
+                                            text
+                                            @click="dialogEducationDocs = false"
+                                          >
+                                            Cancelar
+                                          </v-btn>
+                                          <v-btn
+                                            color="blue darken-1"
+                                            text
+                                            @click="SaveDocEdu()"
+                                          >
+                                            Adicionar
+                                          </v-btn>
+                                        </v-card-actions>
+                                      </v-card>
+                                    </v-dialog>
+                                  </v-row>
                                 </div>
                             </v-card-text>
                         </v-col>
@@ -355,6 +521,7 @@
 <script>
 import axios from 'axios'
 import { BASE_URL } from '../../config/api'
+import Swal from "sweetalert2"
 import companyDataDialog from "./companyDataDialog.vue";
 import personlDataDialog from "./personlDataDialog.vue";
 import educationDataDialog from './educationDataDialog.vue';
@@ -365,6 +532,8 @@ export default {
     dialog: false,
     dialogCompany: false,
     dialogEducation: false,
+    dialogPersonalDocs: false,
+    dialogEducationDocs: false,
     initialsNameUser: "",
     employee: {
         id: null,
@@ -382,6 +551,19 @@ export default {
         salario: "",
         contrato: ""
     },
+    newDocPersonal: {
+      name: "",
+      anexo: null,
+      type: 1
+    },
+    newDocEduc: {
+      name: "",
+      anexo: null,
+      type: 2
+    },
+    allDocs: [],
+    empDocs: [],
+    eduDocs: [],
     personal_data: {
         id: null,
         nome_completo: "",
@@ -465,13 +647,60 @@ export default {
             if (me.nivel_academico) {
                 this.nivel_academico = me.nivel_academico
             }
+            if (me.employee.documento) {
+              this.empDocs = me.employee.documento.filter(doc => doc.type == 1)
+              this.eduDocs = me.employee.documento.filter(doc => doc.type == 2)
+              // console.log(this.empDocs);
+            }
             // console.log(this.employee);
             this.$store.state.Loader.loading = false
         } catch (error) {
             console.log(error);
             this.$router.push({name: 'login'})
         }
-    }
+    },
+    async SaveDocEmployee() {
+    this.$store.state.Loader.loading = true
+    const formData = new FormData()
+    formData.append('name', this.newDocPersonal.name)
+    formData.append('type', this.newDocPersonal.type)
+    formData.append('employe_id', this.employee.id)
+    if (this.newDocPersonal.anexo !== null && typeof(this.newDocPersonal.anexo) !== 'string' ) {
+          formData.append('anexo', this.newDocPersonal.anexo)
+      }
+    await axios.post(`${BASE_URL}employe/documento`, formData)
+    this.getMe()
+    this.dialogPersonalDocs = false
+    this.$store.state.Loader.loading = false
+    Swal.fire({
+        icon: 'success',
+        title: 'Dados guardados com sucesso',
+        showConfirmButton: false,
+        timer: 1500
+    })
+      
+  },
+  async SaveDocEdu() {
+    this.$store.state.Loader.loading = true
+    const formData = new FormData()
+    formData.append('name', this.newDocEduc.name)
+    formData.append('type', this.newDocEduc.type)
+    formData.append('employe_id', this.employee.id)
+    if (this.newDocEduc.anexo !== null && typeof(this.newDocEduc.anexo) !== 'string' ) {
+          formData.append('anexo', this.newDocEduc.anexo)
+      }
+    await axios.post(`${BASE_URL}employe/documento`, formData)
+    this.getMe()
+    this.dialogEducationDocs = false
+    this.$store.state.Loader.loading = false
+    Swal.fire({
+        icon: 'success',
+        title: 'Dados guardados com sucesso',
+        showConfirmButton: false,
+        timer: 1500
+    })
+      
+  }
   },
   watch: {
     user(user) {
@@ -505,7 +734,9 @@ export default {
         }
         return "";
     }
-  },
+  }
+  
+  
 
 };
 </script>

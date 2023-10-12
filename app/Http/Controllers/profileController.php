@@ -13,6 +13,7 @@ use App\Employee;
 use App\User;
 use App\PersonalData;
 use App\NivelAcademico;
+use App\Documento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -92,7 +93,7 @@ class profileController extends Controller
     }
     public function meAdapter() {
         $id = Auth::user()->id;
-        $user = User::where('id', $id)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
+        $user = User::where('id', $id)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel', 'employee.documento')->first();
         return response()->json($user, 200);
     }
     public function storePesonalData(Request $request) {
@@ -155,6 +156,25 @@ class profileController extends Controller
             $nivel_academico->save();
             DB::commit();
             return response()->json("Nivel academico saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
+    public function saveDocs(Request $request) {
+        $input = $request->only(['employe_id', 'name', 'type']);
+        DB::beginTransaction();
+        try {
+            if ($request->anexo) {
+                $path = 'uploads';
+                $document = time().'.' . $request->anexo->getClientOriginalExtension();
+                $request->anexo->move(public_path($path), $document);
+                $input['anexo'] = $path . '/' . $document;
+            }
+            $documento = Documento::create($input);
+            $documento->save();
+            DB::commit();
+            return response()->json("Documentos saved Successfully", 201);
         } catch (Exception $e) {
             DB::rollback();
             return response()->json($e->message(), 500);

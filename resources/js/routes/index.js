@@ -9,6 +9,9 @@ import Login from "../components/layout/auth/login.vue"
 import register from "../components/layout/auth/register.vue"
 import colaboradorDetalhes from "../components/layout/colaboradorDetails.vue"
 import asseduidade from "../components/layout/asseduidade.vue"
+import users from "../components/layout/users.vue"
+import desempenho from "../components/layout/desempenho.vue"
+import relatorios from "../components/layout/relatorios.vue"
 
 
 Vue.use(VueRouter)
@@ -42,13 +45,32 @@ const routes = [
                 meta: {admin: true}
             },
             {
+                path: '/relatorios',
+                component: relatorios,
+                name: 'admin.relatorios',
+                meta: {admin: true}
+            },
+            {
                 path: '/gestao-asseduidade',
                 component: asseduidade,
                 name: 'colaborador.asseduidade',
                 meta: {admin: true}
 
-            }
-            ,
+            },
+            {
+                path: '/users',
+                component: users,
+                name: 'admin.users',
+                meta: {admin: true}
+
+            },
+            {
+                path: '/desempenho',
+                component: desempenho,
+                name: 'admin.desempenho',
+                meta: {admin: true}
+
+            },
             {
                 path: '/colaboradores/:id/detalhes',
                 component: colaboradorDetalhes,

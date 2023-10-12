@@ -39,6 +39,7 @@ Route::group([
     Route::post('/employe/personal-data', 'profileController@storePesonalData');
     Route::post('/employe/personal-data/{id}', 'profileController@updatePesonalData');
     Route::post('/employe/nivel-academico', 'profileController@storeNivelAcademicoData');
+    Route::post('/employe/documento', 'profileController@saveDocs');
     Route::post('/employe/nivel-academico/{id}', 'profileController@updateNivelAcademicoData');
     Route::get('/testsecto', function () {
     });
@@ -46,8 +47,15 @@ Route::group([
     Route::get('/get-colaboradores', 'adminController@getColaboradores');
     Route::get('/colaborador/{id}', 'adminController@showColaborador');
     Route::get('/get-asseduidades', 'adminController@getAsseduidades');
+    Route::get('/get-users', 'adminController@getUsers');
+    Route::post('/new-user', 'adminController@newUser');
+    Route::match(['put', 'post'], '/update-user/{id}', 'adminController@updateUser');
+    Route::get('/get-roles', 'adminController@getRoles');
     Route::post('/save-asseduidades', 'adminController@storeAssiduidade');
+    Route::post('/save-desempenho', 'adminController@storeDesempenho');
     Route::match(['put', 'post'], '/update-asseduidades/{id}', 'adminController@updateAssiduidade');
     Route::get('/get-colaboradores-list', 'adminController@getEmployes');
+    Route::get('/get-desempenhos', 'adminController@getDesempenhos');
+    Route::get('/relatorios', 'adminController@relatorios');
     // return NivelAcademico::get();
 });

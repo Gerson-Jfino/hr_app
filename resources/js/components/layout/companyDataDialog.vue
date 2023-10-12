@@ -513,7 +513,9 @@ export default {
 			this.personalDataForm.sector_id = this.sector_id
             const formData = new FormData();
             Object.keys(this.personalDataForm).forEach(key => formData.append(key, this.personalDataForm[key]))
-            formData.append("documeto", this.documento);
+            if (typeof(this.documento) !== 'string' && this.documento !== null) {
+                formData.append("documeto", this.documento);
+            }
             if (this.personalDataForm.id !== null) {
                 Axios.post(`${BASE_URL}employe/company-data/${this.personalDataForm.id}`, formData)
                     .then(res => {

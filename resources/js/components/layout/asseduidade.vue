@@ -23,106 +23,12 @@
                                     <v-col cols="7">
                                     </v-col>
                                     <v-col cols="2" style="margin-top: -10px;">
-                                        <!-- <v-row>
-                                            <v-col>
-                                                <v-btn @click="() => {dialog = true}">
-                                                    Adicionar Asseduidade
-                                                </v-btn>
-                                            </v-col>
-                                        </v-row> -->
-                                        <!-- <v-row justify="center">
-                                            <v-dialog
-                                            v-model="dialog"
-                                            persistent
-                                            max-width="600px"
-                                            >
-                                            <v-card>
-                                                <v-card-title>
-                                                <span class="text-h5">User Profile</span>
-                                                </v-card-title>
-                                                <v-card-text>
-                                                <v-container> -->
-                                                    <!-- <v-row>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="8"
-                                                    >
-                                                        <v-select
-                                                        label="Colaborador"
-                                                        placeholder="selecione o colaborador">
-
-                                                        </v-select>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="4"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                        label="Data de inico"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                        label="Data final"
-                                                        persistent-hint
-                                                        required
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col cols="8">
-                                                        <v-select
-                                                        label="Absetismo"
-                                                        required
-                                                        ></v-select>
-                                                    </v-col>
-                                                    <v-col cols="12">
-                                                        <v-textarea
-                                                    name="input-7-1"
-                                                    label="Observações"
-                                                    hint="Hint text"
-                                                    ></v-textarea>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                    >
-                                                        <v-text-field
-                                                        label="Anexo"></v-text-field>
-                                                    </v-col>
-                                                    </v-row> -->
-                                                <!-- </v-container>
-                                                <small>*indicates required field</small>
-                                                </v-card-text>
-                                                <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn
-                                                    color="blue darken-1"
-                                                    text
-                                                    @click="dialog = false"
-                                                >
-                                                    Close
-                                                </v-btn>
-                                                <v-btn
-                                                    color="blue darken-1"
-                                                    text
-                                                    @click="dialog = false"
-                                                >
-                                                    Save
-                                                </v-btn>
-                                                </v-card-actions>
-                                            </v-card>
-                                            </v-dialog>
-                                        </v-row> -->
+                                       
                                     </v-col>
                                 </v-row>
                             </v-card-text>
                         </v-card>
-                    <!-- </v-sheet> -->
+                  
                 </v-col>
             </v-row>
             <row>
