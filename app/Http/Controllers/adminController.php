@@ -58,7 +58,8 @@ class adminController extends Controller
         return response()->json($colaboradores, 200);
     }
     public function showColaborador($id) {
-        $user = User::where('id', $id)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
+        $employe = $this->employee->find($id)->first();
+        $user = User::where('id', $employe->user_id)->with('employee', 'personal_data', 'nivel_academico', 'nivel_academico.nivel','employee.situation', 'employee.pelouro', 'employee.sector', 'employee.uni_org', 'employee.categoria', 'employee.nivel')->first();
         return response()->json($user, 200);
     }
     public function getEmployes() {
