@@ -547,6 +547,7 @@ export default {
         pelouro_id: null,
         uni_org_id: null,
         sector_id: null,
+        documento: [],
         inss: "",
         salario: "",
         contrato: ""
@@ -647,10 +648,9 @@ export default {
             if (me.nivel_academico) {
                 this.nivel_academico = me.nivel_academico
             }
-            if (me.employee.documento) {
-              this.empDocs = me.employee.documento.filter(doc => doc.type == 1)
-              this.eduDocs = me.employee.documento.filter(doc => doc.type == 2)
-              // console.log(this.empDocs);
+            if (me.employee && me.employee.documento) {
+              this.empDocs = me.employee?.documento.filter(doc => doc.type == 1)
+              this.eduDocs = me.employee?.documento.filter(doc => doc.type == 2)
             }
             // console.log(this.employee);
             this.$store.state.Loader.loading = false
