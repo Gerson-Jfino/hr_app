@@ -63,9 +63,9 @@ import { BASE_URL } from '../../config/api';
     },
     created() {
       this.getUserId()
-      setTimeout(() => {
-        this.$router.push({name: 'colaboradores.data'})
-      }, 2000)
+      // setTimeout(() => {
+      //   this.$router.push({name: 'colaboradores.data'})
+      // }, 2000)
     },
     methods: {
       async getUserId() {
