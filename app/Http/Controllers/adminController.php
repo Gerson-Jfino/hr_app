@@ -14,6 +14,7 @@ use App\Role;
 use App\EmployeAsseduidade;
 use App\PersonalData;
 use App\Desempenho;
+use Faker\Generator as Faker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -26,11 +27,13 @@ class adminController extends Controller
     private $nivel_academico;
     private $employe_asseduidade;
     private $user;
+    private $faker;
     private $desempenho;
-    public function __construct(Employee $employee, PersonalData $personal_data, EmployeAsseduidade $employe_asseduidade, User $user, Desempenho $desempenho) {
+    public function __construct(Employee $employee, PersonalData $personal_data, EmployeAsseduidade $employe_asseduidade, User $user, Desempenho $desempenho, Faker $faker) {
         $this->employee = $employee;
         $this->personal_data = $personal_data;
         $this->user = $user;
+        $this->faker = $faker;
         $this->employe_asseduidade = $employe_asseduidade;
         $this->desempenho = $desempenho;
     }
@@ -44,6 +47,86 @@ class adminController extends Controller
         ];
         $colaboradores = $this->employee->filterEmploye($filters)->with('situation', 'pelouro', 'sector', 'uni_org', 'categoria')->paginate(15);
         return response()->json($colaboradores, 200);
+    }
+    public function createTempUser(Faker $faker) {
+        $input = [
+            "name" => $faker->name,
+            'role_id' => 2,
+            'active' => 0,
+            'email' => $faker->unique()->safeEmail,
+            'password' => Hash::make("passeord")
+        ];
+        DB::beginTransaction();
+        try {
+            $user = $this->user->create($input);
+            DB::commit();
+            return response()->json(["message" => "utilizador criado com sucesos", "userId" => $user->id], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json($e, 500);
+        }
+    }
+    public function storePesonalData(Request $request) {
+        $input = $request->all();
+        DB::beginTransaction();
+        try {
+            if ($request->documeto) {
+                $path = 'uploads';
+                $document = time().'.' . $request->documeto->getClientOriginalExtension();
+                $request->documeto->move(public_path($path), $document);
+                $input['anexo_documento'] = $path . '/' . $document;
+            } else {
+                $input['anexo_documento'] = null;
+            }
+            $personal_data = $this->personal_data->create($input);
+            $personal_data->save();
+            DB::commit();
+            return response()->json("Personal Data saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
+    public function storeCompanyData(Request $request) {
+        $input = $request->all();
+        DB::beginTransaction();
+        try {
+            if ($request->documeto) {
+                $path = 'uploads';
+                $document = time().'.' . $request->documeto->getClientOriginalExtension();
+                $request->documeto->move(public_path($path), $document);
+                $input['contrato'] = $path . '/' . $document;
+            } else {
+                $input['contrato'] = null;
+            }
+            $employee = $this->employee->create($input);
+            // $employee->user_id = 1;
+            $employee->save();
+            DB::commit();
+            return response()->json("Data saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
+    }
+    public function storeNivelAcademicoData(Request $request) {
+        $input = $request->only(['nivel_id', 'curso', 'instituicao']);
+        DB::beginTransaction();
+        try {
+            if ($request->anexo) {
+                $path = 'uploads';
+                $document = time().'.' . $request->anexo->getClientOriginalExtension();
+                $request->anexo->move(public_path($path), $document);
+                $input['anexo'] = $path . '/' . $document;
+            }
+            $nivel_academico = $this->nivel_academico->create($input);
+            $nivel_academico->save();
+            DB::commit();
+            return response()->json("Nivel academico saved Successfully", 201);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->message(), 500);
+        }
     }
     public function getDesempenhos() {
         $colaboradores = $this->employee->with('situation', 'pelouro', 'sector', 'uni_org', 'categoria', 'desempenho')->get()->map(function ($col) {
@@ -101,7 +184,7 @@ class adminController extends Controller
         }
     }
     public function getUsers() {
-        $users = User::get()->map(function ($ass) {
+        $users = User::where('active', 1)->get()->map(function ($ass) {
             return [
                 "name" => $ass->name,
                 "email" => $ass->email,

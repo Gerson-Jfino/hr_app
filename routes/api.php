@@ -35,10 +35,13 @@ Route::group([
 ], function () {
     Route::get('/pelouros', 'profileController@getPelouros');
     Route::post('/employe/company-data', 'profileController@storeCompanyData');
+    Route::post('/admin/employe/company-data', 'adminController@storeCompanyData');
     Route::post('/employe/company-data/{id}', 'profileController@updateCompanyData');
     Route::post('/employe/personal-data', 'profileController@storePesonalData');
+    Route::post('/admin/employe/personal-data', 'adminController@storePesonalData');
     Route::post('/employe/personal-data/{id}', 'profileController@updatePesonalData');
     Route::post('/employe/nivel-academico', 'profileController@storeNivelAcademicoData');
+    Route::post('/admin/employe/nivel-academico', 'adminController@storeNivelAcademicoData');
     Route::post('/employe/documento', 'profileController@saveDocs');
     Route::post('/employe/nivel-academico/{id}', 'profileController@updateNivelAcademicoData');
     Route::get('/testsecto', function () {
@@ -57,5 +60,6 @@ Route::group([
     Route::get('/get-colaboradores-list', 'adminController@getEmployes');
     Route::get('/get-desempenhos', 'adminController@getDesempenhos');
     Route::get('/relatorios', 'adminController@relatorios');
+    Route::get('/createTempUser', 'adminController@createTempUser');
     // return NivelAcademico::get();
 });

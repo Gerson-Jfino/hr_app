@@ -12,6 +12,7 @@ import asseduidade from "../components/layout/asseduidade.vue"
 import users from "../components/layout/users.vue"
 import desempenho from "../components/layout/desempenho.vue"
 import relatorios from "../components/layout/relatorios.vue"
+import colaboradorForm from "../components/layout/colaboradorForm.vue"
 
 
 Vue.use(VueRouter)
@@ -75,6 +76,13 @@ const routes = [
                 path: '/colaboradores/:id/detalhes',
                 component: colaboradorDetalhes,
                 name: 'colaborador.details',
+                props: true,
+                meta: {admin: true}
+            },
+            {
+                path: '/colaboradores/adicionar',
+                component: colaboradorForm,
+                name: 'colaborador.create',
                 props: true,
                 meta: {admin: true}
             },

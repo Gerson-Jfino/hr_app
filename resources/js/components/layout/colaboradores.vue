@@ -20,11 +20,9 @@
                                             solo
                                             @click:append.prevent="search"
 			                                @keypress.enter.prevent="search">
-                                        </v-text-field>
+                                            </v-text-field>
                                         </v-col>
-                                        <v-col cols="2">
-
-                                        </v-col>
+                                        
                                         <v-col cols="7">
 
                                             <v-row>
@@ -65,6 +63,20 @@
                     <v-col cols="12">
                         <v-sheet rounded="lg">
                             <v-card>
+                                <v-card-title>
+                                    <v-row>
+                                        <v-col cols="2">
+                                            <v-btn
+                                            color="#ff9900"
+                                            dark
+                                            class="mb-2"
+                                            :to="{name: 'colaborador.create'}"
+                                            >
+                                            Adicionar Colaborador
+                                            </v-btn>
+                                        </v-col>
+                                    </v-row>
+                                </v-card-title>
                                 <v-card-text>
                                     <v-simple-table
                                         fixed-header
