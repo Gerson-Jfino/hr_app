@@ -253,7 +253,7 @@
                             style="font-size: small"
                           >
                             <strong>Data inicio</strong> &#x2022; {{ employee.data_admissao | formatDate }} -
-                            <strong>Data inicio</strong> &#x2022; {{ employee.data_fim | formatDate }}
+                            <strong>Data Fim</strong> &#x2022; {{ employee.data_fim | formatDate }}
                           </div>
                           <div>
                             <strong>{{ employee?.situation?.name }}</strong> &#x2022; {{ employee.data_situacao | formatDate }}

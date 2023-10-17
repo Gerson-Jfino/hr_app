@@ -208,7 +208,7 @@
                               style="font-size: small"
                             >
                               <strong>Data inicio</strong> &#x2022; {{ employee.data_admissao }} -
-                              <strong>Data inicio</strong> &#x2022; {{ employee.data_fim }}
+                              <strong>Data Fim</strong> &#x2022; {{ employee.data_fim }}
                             </div>
                             <div>
                               <strong>{{ employee?.situation?.name }}</strong> &#x2022; {{ employee.data_situacao }}
