@@ -9,6 +9,7 @@ import Login from "../components/layout/auth/login.vue"
 import register from "../components/layout/auth/register.vue"
 import colaboradorDetalhes from "../components/layout/colaboradorDetails.vue"
 import asseduidade from "../components/layout/asseduidade.vue"
+import financeiro from "../components/layout/financeiro.vue"
 import users from "../components/layout/users.vue"
 import desempenho from "../components/layout/desempenho.vue"
 import relatorios from "../components/layout/relatorios.vue"
@@ -55,6 +56,13 @@ const routes = [
                 path: '/gestao-asseduidade',
                 component: asseduidade,
                 name: 'colaborador.asseduidade',
+                meta: {admin: true}
+
+            },
+            {
+                path: '/gestao-financeira',
+                component: financeiro,
+                name: 'colaborador.financeiro',
                 meta: {admin: true}
 
             },

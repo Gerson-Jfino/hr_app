@@ -17,7 +17,7 @@ if(token_auth) {
     store.dispatch('Auth/checkAuthenticated')
         .then( () => {
             console.log('ok');
-            router.push({ name: 'personal.data' })
+            router.push({ name: 'colaboradores.data' })
         }).catch(() => {
             console.log("err");
             router.push({name: 'login'})

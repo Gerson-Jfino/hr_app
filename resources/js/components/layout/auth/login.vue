@@ -73,7 +73,7 @@ export default {
             console.log(this.formData);
             this.$store.dispatch('Auth/login', this.formData)
                 .then(res => {
-                    this.$router.push({name: 'personal.data'})
+                    this.$router.push({name: 'colaboradores.data'})
                     console.log(res);
                 }).catch(err => {
                     Swal.fire({

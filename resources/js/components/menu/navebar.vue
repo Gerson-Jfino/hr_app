@@ -53,17 +53,17 @@
 			<v-list-item>
 
 			</v-list-item>
-			<v-list-item :to="{name: 'personal.data'}">
+			<!-- <v-list-item :to="{name: 'personal.data'}">
                 <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-clipboard-account </v-icon></v-list-item-icon>
 				<v-list-item-title style="color:rgb(255, 153, 0);">Minha Ficha</v-list-item-title>
+			</v-list-item> -->
+			<v-list-item :to="{name: 'admin.relatorios'}" v-if="user.role_id == 1">
+                <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-chart-line </v-icon></v-list-item-icon>
+				<v-list-item-title style="color:rgb(255, 153, 0);">Relatórios</v-list-item-title>
 			</v-list-item>
 			<v-list-item :to="{name: 'colaboradores.data'}" v-if="user.role_id == 1">
                 <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-account-group </v-icon></v-list-item-icon>
 				<v-list-item-title style="color:rgb(255, 153, 0);">Colaboradores</v-list-item-title>
-			</v-list-item>
-			<v-list-item :to="{name: 'admin.relatorios'}" v-if="user.role_id == 1">
-                <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-chart-line </v-icon></v-list-item-icon>
-				<v-list-item-title style="color:rgb(255, 153, 0);">Relatórios</v-list-item-title>
 			</v-list-item>
 			<v-list-item :to="{name: 'colaborador.asseduidade'}" v-if="user.role_id == 1">
                 <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-timer-marker </v-icon></v-list-item-icon>
@@ -72,6 +72,10 @@
 			<v-list-item :to="{name: 'admin.desempenho'}" v-if="user.role_id == 1">
 				<v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-progress-pencil  </v-icon></v-list-item-icon>
 				<v-list-item-title style="color:#ff9900;">Gestão de Desempenhos</v-list-item-title>
+			</v-list-item>
+			<v-list-item :to="{name: 'colaborador.financeiro'}" v-if="user.role_id == 1">
+				<v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-cash-multiple   </v-icon></v-list-item-icon>
+				<v-list-item-title style="color:#ff9900;">Gestão de Financeira</v-list-item-title>
 			</v-list-item>
 			<v-list-item :to="{name: 'admin.users'}" v-if="user.role_id == 1">
                 <v-list-item-icon style="color:rgb(255, 153, 0);"><v-icon>mdi-account </v-icon></v-list-item-icon>

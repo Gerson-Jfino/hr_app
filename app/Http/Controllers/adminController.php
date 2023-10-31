@@ -272,9 +272,33 @@ class adminController extends Controller
                 "count" => $sit->count
             ];
         });
+        $employePerUniOrg = UnidadeOrganica::get()->map(
+            function ($uni) {
+                $employessss = [];
+                return [
+                    $uni->name => Employee::where('uni_org_id', $uni->id)->get()->count()
+                ];
+            }
+        );
+        $employeSituacao = Situation::get()->map(function ($sit) {
+            return [
+                $sit->name => Employee::where('situation_id', $sit->id)->get()->count()
+            ];
+        });
+        $employeeGenero = [
+            [
+                "masculino" => PersonalData::where('genero', 'MASCULINO')->get()->count()
+            ],
+            [
+                "feminino" => PersonalData::where('genero', 'FEMININO')->get()->count(),
+            ],
+        ];
 
 
         $stats = [
+            'generos' => $employeeGenero,
+            'employee_situation' => $employeSituacao,
+            'employee_uniOrg' => $employePerUniOrg,
             "total_emplyes" =>$totalEmployes,
             "total_situation" =>$situation,
         ];
